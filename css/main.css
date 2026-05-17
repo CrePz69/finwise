@@ -527,48 +527,72 @@ kbd{display:inline-block;padding:2px 6px;border-radius:5px;border:1px solid var(
 
 .spin{animation:spinIcon .8s linear infinite;}
 @keyframes spinIcon{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-/* MOBILE BOTTOM NAV FIX */
+
+/* STRONG MOBILE BOTTOM NAV FIX */
 @media (max-width:768px){
 
   html,
   body{
-    overflow-x:hidden;
+    overflow-x:hidden !important;
   }
 
   .exp-nav{
-    left:12px !important;
-    right:12px !important;
-    bottom:calc(12px + env(safe-area-inset-bottom)) !important;
+    display:grid !important;
+    grid-template-columns:repeat(6, 1fr) !important;
 
+    left:10px !important;
+    right:10px !important;
+    bottom:12px !important;
     width:auto !important;
-    max-width:calc(100vw - 24px) !important;
+    max-width:none !important;
 
     transform:none !important;
 
-    overflow-x:auto;
-    overflow-y:hidden;
+    overflow:visible !important;
+    gap:4px !important;
+    padding:8px !important;
 
-    -webkit-overflow-scrolling:touch;
-
-    padding:8px 10px;
+    border-radius:24px !important;
   }
 
-  .exp-nav::-webkit-scrollbar{
-    display:none;
-  }
-
-  .exp-link{
-    flex-shrink:0;
-  }
-
+  .exp-link,
   .exp-link:hover,
   .exp-link.exp-active{
-    width:46px !important;
-    min-width:46px !important;
+    width:auto !important;
+    min-width:0 !important;
+    height:44px !important;
+
     padding:0 !important;
+    gap:0 !important;
+
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
   }
 
   .exp-link .exp-label{
     display:none !important;
+  }
+
+  .exp-link .exp-icon{
+    font-size:18px !important;
+  }
+
+  .exp-sep{
+    display:none !important;
+  }
+
+  .exp-actions{
+    display:contents !important;
+    margin:0 !important;
+    gap:0 !important;
+  }
+
+  .exp-action-btn,
+  .exp-quick-btn{
+    width:auto !important;
+    min-width:0 !important;
+    height:44px !important;
+    border-radius:16px !important;
   }
 }
