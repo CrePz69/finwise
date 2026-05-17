@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinWise — Smart Money Manager for Young People</title>
+  <meta name="description" content="FinWise helps young people track expenses, build smart budgets, and grow financial awareness. Free, private, no account needed.">
+  <meta name="keywords" content="financial literacy, youth, budget tracker, expense tracker, money management, وعي مالي, ميزانية, شباب">
+  <meta name="author" content="FinWise">
+  <meta name="theme-color" content="#b8f050">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FinWise — Smart Money Manager">
+  <meta property="og:description" content="Track expenses, build budgets, and grow your financial awareness. Built for young people.">
+  <meta property="og:url" content="https://finwise.eg">
+  <meta property="og:site_name" content="FinWise">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FinWise — Smart Money Manager">
+  <meta name="twitter:description" content="Track expenses, build budgets, grow financial awareness. Built for young people.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzBhMGMxMCIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNiOGYwNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkY8L3RleHQ+Cjwvc3ZnPg==">
+  <link rel="manifest" href="assets/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+:root{--ff-head:'Syne',sans-serif;--ff-body:'Instrument Sans',sans-serif;--ff-ar:'Cairo',sans-serif;}
+[data-theme="dark"]{--bg:#0a0c10;--bg2:#111318;--bg3:#181b22;--bg4:#1f2330;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#edeae4;--text2:#9199ad;--text3:#5a6070;--accent:#b8f050;--accent-dim:rgba(184,240,80,0.12);--accent2:#50c8f0;--accent3:#f09050;--success:#50d090;--danger:#f05050;--warning:#f0c050;--card-bg:#111318;--nav-bg:rgba(10,12,16,0.92);--shadow:0 1px 3px rgba(0,0,0,0.4);}
+[data-theme="light"]{--bg:#f4f2ee;--bg2:#fff;--bg3:#f9f8f5;--bg4:#eeecea;--border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);--text:#1a1c22;--text2:#6b7080;--text3:#a0a8b8;--accent:#4a8a00;--accent-dim:rgba(74,138,0,0.10);--accent2:#0080b0;--accent3:#b06000;--success:#00884a;--danger:#c03030;--warning:#a07000;--card-bg:#fff;--nav-bg:rgba(244,242,238,0.92);--shadow:0 1px 3px rgba(0,0,0,0.1);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;transition:background .3s,color .3s;}
+[dir="rtl"]{font-family:var(--ff-ar);}
+h1,h2,h3,h4,h5{font-family:var(--ff-head);}
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,[dir="rtl"] h5{font-family:var(--ff-ar);}
+
+/* LOADING SCREEN */
+.loader-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:opacity .5s ease;}
+.loader-screen.hide{opacity:0;pointer-events:none;}
+.loader-logo{font-family:var(--ff-head);font-size:48px;font-weight:800;color:var(--accent);letter-spacing:-2px;animation:logoPulse 1.5s ease infinite;}
+.loader-logo span{color:var(--text);}
+@keyframes logoPulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+.loader-tip{font-size:15px;color:var(--text2);max-width:360px;text-align:center;line-height:1.7;font-style:italic;}
+.loader-bar-wrap{width:280px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.loader-bar{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease;}
+.loader-pct{font-size:12px;color:var(--text3);font-family:var(--ff-head);}
+
+/* NAV */
+.fw-nav{background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000;}
+.fw-logo{font-family:var(--ff-head);font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-0.5px;cursor:pointer;}
+.fw-logo span{color:var(--text);}
+.nav-tabs-fw{display:flex;gap:2px;flex-wrap:wrap;}
+.nav-tab-fw{padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;font-family:var(--ff-body);transition:all .18s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+[dir="rtl"] .nav-tab-fw{font-family:var(--ff-ar);}
+.nav-tab-fw:hover{color:var(--text);background:var(--bg4);}
+.nav-tab-fw.active{color:var(--accent);background:var(--accent-dim);}
+.nav-tab-fw .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--danger);display:none;flex-shrink:0;}
+.nav-tab-fw.has-alert .badge-dot{display:block;}
+.nav-right{display:flex;align-items:center;gap:6px;}
+.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent);}
+.lang-btn{padding:4px 10px;border-radius:8px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:12px;font-weight:600;transition:all .18s;}
+.lang-btn:hover{color:var(--accent);border-color:var(--accent);}
+.quick-add-fab{width:36px;height:36px;border-radius:10px;background:var(--accent);border:none;color:#0a0c10;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;font-weight:700;transition:transform .15s,opacity .15s;box-shadow:0 4px 14px rgba(184,240,80,.35);}
+.quick-add-fab:hover{transform:scale(1.08);opacity:.9;}
+
+/* QUICK ADD POPUP */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.popup-box{background:var(--card-bg);border:1px solid var(--border2);border-radius:18px;padding:24px;width:100%;max-width:380px;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:popIn .25s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.popup-title{font-family:var(--ff-head);font-size:18px;font-weight:700;margin-bottom:16px;}
+[dir="rtl"] .popup-title{font-family:var(--ff-ar);}
+
+/* MINI CALC */
+.calc-wrap{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:16px;padding:16px;margin-bottom:12px;
+  overflow:hidden;
+  transform-origin:top center;
+  animation:calcSlideIn .38s cubic-bezier(.34,1.42,.64,1) forwards;
+}
+@keyframes calcSlideIn{
+  0%{opacity:0;transform:scaleY(0.4) translateY(-18px);filter:blur(4px);}
+  60%{opacity:1;filter:blur(0);}
+  100%{opacity:1;transform:scaleY(1) translateY(0);filter:blur(0);}
+}
+.calc-display{
+  font-family:var(--ff-head);font-size:26px;text-align:right;color:var(--text);
+  padding:10px 14px;background:var(--bg4);border-radius:10px;min-height:48px;
+  word-break:break-all;margin-bottom:12px;letter-spacing:-0.5px;
+  border:1px solid var(--border2);
+  transition:all .2s ease;
+  position:relative;overflow:hidden;
+}
+.calc-display::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,240,80,0.04),transparent);
+  pointer-events:none;
+}
+[dir="rtl"] .calc-display{text-align:left;}
+.calc-display.result-flash{
+  color:var(--accent);
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-dim);
+}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.calc-btn{
+  padding:11px 4px;border-radius:9px;border:none;cursor:pointer;
+  font-size:15px;font-weight:700;font-family:var(--ff-head);
+  transition:transform .12s cubic-bezier(.34,1.56,.64,1), box-shadow .12s, opacity .12s;
+  position:relative;overflow:hidden;
+}
+.calc-btn::after{
+  content:'';position:absolute;inset:0;border-radius:9px;
+  background:radial-gradient(circle at center, rgba(255,255,255,0.18) 0%, transparent 70%);
+  opacity:0;transition:opacity .2s;
+}
+.calc-btn:hover{transform:scale(1.06);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.calc-btn:hover::after{opacity:1;}
+.calc-btn:active{transform:scale(0.91);box-shadow:none;}
+.calc-num{background:var(--bg4);color:var(--text);}
+.calc-op{background:rgba(184,240,80,.18);color:var(--accent);border:1px solid rgba(184,240,80,.2);}
+.calc-eq{
+  background:var(--accent);color:#0a0c10;
+  box-shadow:0 4px 14px rgba(184,240,80,.35);
+}
+.calc-eq:hover{box-shadow:0 6px 20px rgba(184,240,80,.5);}
+.calc-clr{background:rgba(240,80,80,.18);color:var(--danger);border:1px solid rgba(240,80,80,.2);}
+.calc-use{
+  width:100%;margin-top:10px;padding:10px;border-radius:10px;
+  background:var(--accent-dim);border:1px solid var(--accent);
+  color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;
+  font-family:var(--ff-body);
+  transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  animation:calcUseIn .4s cubic-bezier(.34,1.42,.64,1) forwards;
+}
+@keyframes calcUseIn{
+  from{opacity:0;transform:translateY(8px) scale(0.95);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.calc-use:hover{background:var(--accent);color:#0a0c10;transform:scale(1.02);box-shadow:0 4px 14px rgba(184,240,80,.3);}
+.calc-btn-stagger{
+  animation:btnPopIn .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes btnPopIn{
+  from{opacity:0;transform:scale(0.6);}
+  to{opacity:1;transform:scale(1);}
+}
+
+/* CARDS */
+.fw-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);}
+.fw-card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:14px;}
+.metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.metric-label{font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.8px;}
+.metric-val{font-family:var(--ff-head);font-size:24px;font-weight:700;margin:4px 0 2px;}
+[dir="rtl"] .metric-val{font-family:var(--ff-ar);}
+.metric-sub{font-size:12px;color:var(--text2);}
+.c-success{color:var(--success);}.c-danger{color:var(--danger);}.c-warning{color:var(--warning);}
+.c-accent{color:var(--accent);}.c-accent2{color:var(--accent2);}.c-accent3{color:var(--accent3);}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:52px 20px;color:var(--text3);}
+.empty-state .es-icon{font-size:48px;margin-bottom:14px;display:block;}
+.empty-state .es-title{font-size:16px;font-weight:600;color:var(--text2);margin-bottom:6px;}
+.empty-state .es-sub{font-size:13px;color:var(--text3);line-height:1.6;}
+
+/* FORMS */
+.fw-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:10px 14px;color:var(--text);font-family:var(--ff-body);font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;}
+[dir="rtl"] .fw-input{font-family:var(--ff-ar);}
+.fw-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.fw-input::placeholder{color:var(--text3);}
+.fw-select{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:10px 14px;color:var(--text);font-family:var(--ff-body);font-size:14px;outline:none;cursor:pointer;}
+[dir="rtl"] .fw-select{font-family:var(--ff-ar);}
+.fw-select option{background:var(--bg3);}
+.fw-label{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:5px;display:block;}
+.input-prefix{position:relative;}
+.input-prefix .prefix-label{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none;}
+[dir="rtl"] .input-prefix .prefix-label{left:auto;right:12px;}
+.input-prefix .fw-input{padding-left:42px;}
+[dir="rtl"] .input-prefix .fw-input{padding-left:14px;padding-right:42px;}
+
+/* BUTTONS */
+.btn-fw{background:var(--accent);color:#0a0c10;border:none;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--ff-head);transition:opacity .15s,transform .15s;display:inline-flex;align-items:center;gap:6px;}
+[dir="rtl"] .btn-fw{font-family:var(--ff-ar);}
+.btn-fw:hover{opacity:.85;transform:translateY(-1px);}
+.btn-fw-outline{background:transparent;color:var(--text);border:1px solid var(--border2);padding:10px 18px;border-radius:9px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--ff-body);transition:all .18s;display:inline-flex;align-items:center;gap:6px;}
+[dir="rtl"] .btn-fw-outline{font-family:var(--ff-ar);}
+.btn-fw-outline:hover{border-color:var(--accent);color:var(--accent);}
+.btn-sm{background:var(--accent);color:#0a0c10;border:none;padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff-head);transition:opacity .15s;display:inline-flex;align-items:center;gap:5px;}
+.btn-sm:hover{opacity:.85;}
+.btn-danger{background:var(--danger);color:#fff;border:none;padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;transition:opacity .15s;}
+.btn-danger:hover{opacity:.8;}
+.btn-export{background:var(--bg3);color:var(--text2);border:1px solid var(--border2);padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff-body);transition:all .18s;display:inline-flex;align-items:center;gap:6px;}
+.btn-export:hover{border-color:var(--accent);color:var(--accent);}
+
+/* CATS */
+.cat-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);font-size:12px;color:var(--text2);transition:all .18s;font-family:var(--ff-body);}
+[dir="rtl"] .cat-chip{font-family:var(--ff-ar);}
+.cat-chip:hover{border-color:var(--accent);color:var(--text);}
+.cat-chip.selected{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+
+/* PROG */
+.prog-bar-bg{height:7px;background:var(--bg4);border-radius:4px;overflow:hidden;}
+.prog-bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+
+/* TAGS */
+.tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:20px;}
+.tag-save{background:rgba(80,208,144,.15);color:var(--success);}
+.tag-invest{background:rgba(80,200,240,.15);color:var(--accent2);}
+.tag-spend{background:rgba(240,144,80,.15);color:var(--accent3);}
+.tag-warn{background:rgba(240,80,80,.15);color:var(--danger);}
+
+/* TABLE */
+.fw-table{width:100%;border-collapse:collapse;}
+.fw-table th{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);font-weight:600;padding:8px 12px;border-bottom:1px solid var(--border);}
+.fw-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:var(--bg3);}
+
+/* HERO */
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--accent);}
+.hero-h1{font-family:var(--ff-head);font-size:clamp(32px,4.5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:18px;}
+[dir="rtl"] .hero-h1{font-family:var(--ff-ar);letter-spacing:0;}
+.hero-h1 .accent{color:var(--accent);}
+.hero-sub{font-size:15px;color:var(--text2);max-width:480px;line-height:1.75;margin-bottom:28px;}
+.hero-stats-row{display:flex;gap:0;margin-bottom:28px;flex-wrap:wrap;}
+.hero-stat{padding:14px 22px;border:1px solid var(--border);background:var(--card-bg);}
+.hero-stat:first-child{border-radius:12px 0 0 12px;}
+.hero-stat:last-child{border-radius:0 12px 12px 0;}
+.hero-stat:not(:first-child):not(:last-child){border-left:none;}
+.hero-stat-num{font-family:var(--ff-head);font-size:22px;font-weight:800;color:var(--accent);}
+.hero-stat-label{font-size:11px;color:var(--text2);}
+
+/* RECENT EXP */
+.recent-exp-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);}
+.recent-exp-item:last-child{border-bottom:none;}
+
+/* CONVERTER */
+.swap-btn{width:40px;height:40px;border-radius:50%;border:2px solid var(--border2);background:var(--bg4);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s;margin:0 auto;}
+.swap-btn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(180deg);}
+.result-big{font-family:var(--ff-head);font-size:34px;font-weight:800;color:var(--accent);}
+[dir="rtl"] .result-big{font-family:var(--ff-ar);}
+.rate-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;}
+
+/* GOALS */
+.goal-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:transform .2s;}
+.goal-card:hover{transform:translateY(-2px);}
+
+/* ARTICLE */
+.article-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.article-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+.article-thumb{height:100px;display:flex;align-items:center;justify-content:center;font-size:36px;border-bottom:1px solid var(--border);}
+.article-body{padding:13px;}
+.article-category{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.article-title{font-family:var(--ff-head);font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.3;}
+[dir="rtl"] .article-title{font-family:var(--ff-ar);}
+.article-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.article-read-time{font-size:11px;color:var(--text3);margin-top:7px;}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.modal-box{background:var(--card-bg);border:1px solid var(--border2);border-radius:18px;max-width:580px;width:100%;max-height:80vh;overflow-y:auto;padding:26px;}
+.modal-box h2{font-family:var(--ff-head);font-size:20px;margin-bottom:12px;}
+[dir="rtl"] .modal-box h2{font-family:var(--ff-ar);}
+.modal-box p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px;}
+.modal-box h4{font-size:14px;font-weight:600;color:var(--text);margin:13px 0 6px;}
+
+/* TOAST */
+.toast-container-fw{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+[dir="rtl"] .toast-container-fw{right:auto;left:24px;}
+.toast-fw{background:var(--card-bg);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;min-width:250px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.3);animation:toastIn .3s ease;pointer-events:all;font-size:13px;}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ALERT BANNER */
+.alert-banner{border-radius:10px;padding:10px 14px;font-size:13px;display:flex;align-items:flex-start;gap:9px;border:1px solid;margin-bottom:10px;}
+.alert-banner.danger{background:rgba(240,80,80,.1);border-color:rgba(240,80,80,.3);color:var(--danger);}
+.alert-banner.warning{background:rgba(240,192,80,.1);border-color:rgba(240,192,80,.3);color:var(--warning);}
+.alert-banner.info{background:var(--accent-dim);border-color:rgba(184,240,80,.3);color:var(--accent);}
+
+/* RECURRING */
+.rec-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);}
+.rec-item:last-child{border-bottom:none;}
+.due-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;}
+.due-soon{background:rgba(240,192,80,.15);color:var(--warning);}
+.due-today{background:rgba(240,80,80,.15);color:var(--danger);}
+.due-ok{background:rgba(80,208,144,.1);color:var(--success);}
+
+.chart-container{position:relative;width:100%;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+@media(max-width:768px){
+  .nav-tabs-fw{gap:1px;}
+  .nav-tab-fw{padding:4px 7px;font-size:11px;}
+  .hero-stats-row .hero-stat{flex:1 1 40%;border-radius:10px!important;margin:3px;border:1px solid var(--border)!important;}
+  .result-big{font-size:26px;}
+}
+
+/* ── EXPANDING BOTTOM NAV (mobile) ───────────────────── */
+.exp-nav{
+  display:none;
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:1100;
+  background:rgba(17,19,24,0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:28px;
+  padding:8px 10px;
+  gap:5px;
+  align-items:center;
+  box-shadow:0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+[data-theme="light"] .exp-nav{
+  background:rgba(255,255,255,0.88);
+  border-color:rgba(0,0,0,0.10);
+  box-shadow:0 8px 32px rgba(0,0,0,0.15);
+}
+.exp-link{
+  display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:16px;
+  border:none;background:none;
+  color:var(--text2);cursor:pointer;
+  font-size:18px;
+  transition:width .4s cubic-bezier(0.175,0.885,0.32,1.275),
+             background .25s ease,
+             color .2s ease;
+  overflow:hidden;white-space:nowrap;gap:0;
+  font-family:var(--ff-body);font-weight:600;font-size:13px;
+  position:relative;
+  flex-shrink:0;
+}
+.exp-link .exp-icon{ font-size:18px; flex-shrink:0; transition:transform .3s cubic-bezier(0.34,1.56,0.64,1); }
+.exp-link .exp-label{
+  max-width:0;overflow:hidden;opacity:0;
+  transition:max-width .35s cubic-bezier(0.175,0.885,0.32,1.275),
+             opacity .25s ease,
+             margin .3s ease;
+  font-size:13px;font-weight:600;white-space:nowrap;
+  margin-left:0;
+}
+.exp-link:hover,.exp-link.exp-active{
+  width:auto;padding:0 14px;gap:7px;
+  background:var(--bg4);color:var(--text);
+}
+[data-theme="light"] .exp-link:hover,
+[data-theme="light"] .exp-link.exp-active{
+  background:rgba(0,0,0,0.07);
+}
+.exp-link:hover .exp-label,
+.exp-link.exp-active .exp-label{
+  max-width:120px;opacity:1;margin-left:0;
+}
+.exp-link:hover .exp-icon,
+.exp-link.exp-active .exp-icon{
+  transform:scale(1.15);
+}
+.exp-link.exp-active{
+  background:var(--accent);color:#0a0c10;
+}
+[data-theme="light"] .exp-link.exp-active{
+  background:var(--accent);color:#0a0c10;
+}
+.exp-link.exp-active .exp-icon{ transform:scale(1.1); }
+.exp-link .exp-alert{
+  position:absolute;top:7px;right:7px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--danger);display:none;
+  border:1.5px solid var(--bg);
+}
+.exp-link.has-alert .exp-alert{display:block;}
+.exp-sep{width:1px;height:28px;background:var(--border2);flex-shrink:0;margin:0 2px;}
+.exp-actions{display:flex;align-items:center;gap:5px;margin-left:2px;}
+.exp-action-btn{
+  width:38px;height:38px;border-radius:13px;
+  border:1px solid var(--border2);background:none;
+  color:var(--text2);cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s cubic-bezier(0.34,1.56,0.64,1);
+  flex-shrink:0;
+}
+.exp-action-btn:hover{color:var(--accent);border-color:var(--accent);transform:scale(1.1);}
+.exp-quick-btn{
+  width:38px;height:38px;border-radius:13px;
+  background:var(--accent);border:none;color:#0a0c10;
+  cursor:pointer;font-size:20px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s cubic-bezier(0.34,1.56,0.64,1), box-shadow .2s;
+  box-shadow:0 3px 12px rgba(184,240,80,.4);
+  flex-shrink:0;
+}
+.exp-quick-btn:hover{transform:scale(1.15) rotate(90deg);box-shadow:0 6px 20px rgba(184,240,80,.55);}
+/* show on mobile */
+@media(max-width:768px){
+  .exp-nav{display:flex;}
+  .fw-nav .nav-tabs-fw{display:none;}
+  body{padding-bottom:90px;}
+}
+
+/* v5 UPGRADES */
+.page-enter{animation:pageIn .32s cubic-bezier(.4,0,.2,1) both;}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fw-card{transition:box-shadow .25s ease,border-color .25s ease;}
+.fw-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.22);}
+.insight-card{border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;transition:transform .2s ease;border:1px solid;}
+.insight-card:hover{transform:translateX(4px);}
+[dir="rtl"] .insight-card:hover{transform:translateX(-4px);}
+.insight-icon{width:36px;height:36px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.progress-ring{transform:rotate(-90deg);}
+.progress-ring-circle{transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1);stroke-linecap:round;}
+.score-ring-good{stroke:#50d090;}.score-ring-ok{stroke:#b8f050;}.score-ring-bad{stroke:#f05050;}
+.scroll-top{position:fixed;bottom:90px;right:20px;z-index:999;width:38px;height:38px;border-radius:12px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s,color .2s;box-shadow:0 4px 14px rgba(0,0,0,.2);}
+.scroll-top.show{opacity:1;pointer-events:all;}
+.scroll-top:hover{color:var(--accent);transform:translateY(-3px);}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.confetti-piece{position:fixed;top:-20px;pointer-events:none;z-index:9998;animation:confettiFall linear forwards;}
+.motiv-strip{margin-top:20px;padding:16px 20px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);display:flex;align-items:center;gap:14px;}
+kbd{display:inline-block;padding:2px 6px;border-radius:5px;border:1px solid var(--border2);background:var(--bg4);font-size:11px;font-family:monospace;color:var(--text2);}
+@keyframes checkPop{0%{transform:scale(0) rotate(-45deg)}60%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.check-anim{animation:checkPop .4s cubic-bezier(.34,1.56,.64,1) both;}
+/* ── RESET BUTTON ─────────────────────────────────── */
+.reset-btn-wrap {
+  position: fixed;
+  bottom: 88px;
+  left: 20px;
+  z-index: 998;
+}
+[dir="rtl"] .reset-btn-wrap { left: auto; right: 20px; }
+
+.reset-btn {
+  width: 42px; height: 42px;
+  border-radius: 13px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  transition: all .25s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  position: relative;
+  overflow: hidden;
+}
+.reset-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(240,80,80,.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.reset-btn:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  transform: scale(1.12) rotate(-15deg);
+  box-shadow: 0 6px 20px rgba(240,80,80,.3);
+}
+.reset-btn:hover::before { opacity: 1; }
+.reset-btn:active { transform: scale(.95) rotate(0deg); }
+
+/* CONFIRM MODAL */
+.reset-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(8px);
+  z-index: 5000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeInOverlay .2s ease;
+}
+@keyframes fadeInOverlay { from{opacity:0} to{opacity:1} }
+
+.reset-modal {
+  background: var(--card-bg);
+  border: 1px solid rgba(240,80,80,.3);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 380px; width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(240,80,80,.1) inset;
+  animation: resetModalIn .35s cubic-bezier(.34,1.42,.64,1);
+}
+@keyframes resetModalIn {
+  from { opacity:0; transform:scale(.85) translateY(20px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+.reset-modal-icon {
+  font-size: 52px; margin-bottom: 16px; display: block;
+  animation: shakeIcon .5s cubic-bezier(.36,.07,.19,.97) .2s both;
+}
+@keyframes shakeIcon {
+  0%,100% { transform:rotate(0); }
+  20%      { transform:rotate(-12deg); }
+  40%      { transform:rotate(10deg); }
+  60%      { transform:rotate(-8deg); }
+  80%      { transform:rotate(6deg); }
+}
+.reset-modal h3 {
+  font-family: var(--ff-head);
+  font-size: 22px; font-weight: 800;
+  margin-bottom: 10px; color: var(--text);
+}
+[dir="rtl"] .reset-modal h3 { font-family: var(--ff-ar); }
+.reset-modal p {
+  font-size: 14px; color: var(--text2);
+  line-height: 1.7; margin-bottom: 24px;
+}
+.reset-warning-list {
+  background: rgba(240,80,80,.08);
+  border: 1px solid rgba(240,80,80,.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+[dir="rtl"] .reset-warning-list { text-align: right; }
+.reset-warning-list li {
+  font-size: 13px; color: var(--danger);
+  margin-bottom: 4px; list-style: none;
+  display: flex; align-items: center; gap: 7px;
+}
+.reset-warning-list li::before { content: '✕'; font-weight: 700; font-size: 11px; }
+.btn-reset-confirm {
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, #f05050, #c03030);
+  color: #fff; border: none; border-radius: 11px;
+  font-family: var(--ff-head); font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-bottom: 10px;
+  transition: all .2s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 4px 16px rgba(240,80,80,.4);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-reset-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240,80,80,.55);
+}
+.btn-reset-confirm:active { transform: scale(.97); }
+.btn-reset-cancel {
+  width: 100%; padding: 11px;
+  background: transparent; color: var(--text2);
+  border: 1px solid var(--border2); border-radius: 11px;
+  font-family: var(--ff-body); font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.btn-reset-cancel:hover { border-color: var(--text2); color: var(--text); }
+
+/* Wipe animation */
+@keyframes wipeOut {
+  0%   { opacity:1; transform:scale(1); }
+  50%  { opacity:.3; transform:scale(.97) blur(2px); }
+  100% { opacity:0; transform:scale(.9); }
+}
+.wiping { animation: wipeOut .5s ease forwards; }
+
+.spin{animation:spinIcon .8s linear infinite;}
+@keyframes spinIcon{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+</style>
+</head>
+<body data-theme="dark">
+
+  <div class="loader-screen" id="loaderScreen">
+    <div class="loader-logo">Fin<span>Wise</span></div>
+    <div class="loader-tip" id="loaderTip"></div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar" style="width:0%"></div>
+    </div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+
+  <div id="root"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <script>
+    const TIPS=[
+      '"The best time to start saving was yesterday. The second best time is now."',
+      '"Do not save what is left after spending — spend what is left after saving." — Warren Buffett',
+      '"Financial freedom is available to those who learn about it and work for it."',
+      '"A budget is telling your money where to go instead of wondering where it went."',
+      '"Small amounts saved daily add up to wealth built yearly."'
+    ];
+    document.getElementById('loaderTip').textContent=TIPS[Math.floor(Math.random()*TIPS.length)];
+    let step=0; const STEPS=3000/60;
+    const bar=document.getElementById('loaderBar');
+    const pct=document.getElementById('loaderPct');
+    const iv=setInterval(()=>{
+      step++;
+      const ratio=step/STEPS;
+      const eased=ratio<0.5?2*ratio*ratio:-1+(4-2*ratio)*ratio;
+      const prog=Math.min(100,Math.round(eased*100));
+      bar.style.width=prog+'%'; pct.textContent=prog+'%';
+      if(step>=STEPS){
+        clearInterval(iv);
+        setTimeout(()=>{
+          const l=document.getElementById('loaderScreen');
+          l.style.opacity='0'; l.style.transition='opacity 0.5s ease';
+          setTimeout(()=>l.style.display='none',500);
+        },300);
+      }
+    },60);
+  </script>
+
+  <script type="text/babel">
+
+const {useState,useEffect,useRef,useCallback,useMemo}=React;
+const STORAGE_KEY='finwise_v4';
+
+const TIPS_AR=['"أفضل وقت للادخار كان بالأمس. ثاني أفضل وقت هو الآن."','"لا تدخر ما تبقى بعد الإنفاق — أنفق ما تبقى بعد الادخار."','"حريتك المالية تبدأ بقرار واحد: ادخار جنيه واحد اليوم."'];
+
+const T={
+  en:{
+    logo:'FinWise',logoSub:'Wise',
+    nav:{home:'Home',tracker:'Tracker',history:'History',plan:'Plan',goals:'Goals',converter:'Converter',recurring:'Recurring',learn:'Learn'},
+    home:{eyebrow:'Financial Literacy for Young People',h1a:'Take control of your',h1b:'money',h1c:'— before it controls you.',sub:'Track every pound, build smart budgets, get personalized advice. Built for young people.',stat1:'73%',stat1l:'Youth have no budget',stat2:'2 min',stat2l:'To set up your plan',stat3:'100%',stat3l:'Free & private',addExp:'Add expense',viewPlan:'View my plan',income:'Monthly income',spent:'This month spent',remaining:'Remaining',savingsRate:'Savings rate',target:'Target: 20%+',overBudget:'Over budget!',available:'Available',setFirst:'Set income in plan',recentExp:'Recent Expenses',noRecent:'No expenses yet 👀',noRecentSub:'Add your first expense to start tracking.',quickAdd:'Quick Add'},
+    tracker:{title:'Daily Expense Tracker',sub:'Log your spending — every pound counts.',todaySpend:"Today's spending",transactions:'transactions',dailyBudget:'Daily budget',basedOn:'Based on your plan',vsbudget:'Status',onTrack:'On Track ✓',over:'Over Budget',setIncome:'Set income first',addNew:'Add New Expense',amount:'Amount (EGP)',date:'Date',note:'Note (optional)',notePlaceholder:'e.g. Lunch at work',category:'Category',addBtn:'Add Expense',todayTx:"Today's Transactions",noTodayExp:"No expenses today 🎉",noTodayExpSub:"You haven't spent anything today. Great job!",missingFields:'Please enter amount and category.',invalidAmt:'Please enter a valid amount.',budgetAlert:"🚨 You've exceeded 80% of your monthly income!",budgetWarn:"⚠️ You're approaching your spending limit.",added:'Expense added',inCat:'in',calculator:'Quick Calculator',useResult:'Use this amount'},
+    history:{title:'Transaction History',sub:'All your expenses in one place.',monthly:'Month-by-Month Comparison',catBreak:'Category Breakdown',allMonths:'All months',allCats:'All categories',total:'Total',date:'Date',category:'Category',note:'Note',amount:'Amount',noData:'No data yet — add expenses to see the chart',noTx:'No transactions to show',noTxFound:"No transactions found 🔍",noTxFoundSub:"Try changing your filters.",exportPDF:'Export PDF',exportExcel:'Export Excel',exportTitle:'Monthly Report'},
+    plan:{title:'My Financial Plan',sub:'Your personalized budget and roadmap.',incomeSetup:'Monthly Income Setup',netIncome:'Net monthly income (EGP)',savePlan:'Save Plan',savedBtn:'Saved!',livingExp:'Living expenses',monthlySav:'Monthly savings',investments:'Investments',healthScore:'Health Score',great:'Great shape! 🎉',room:'Room to improve',needs:'Needs attention ⚠️',basedOn:'Based on your income and spending this month.',budgetVsActual:'Budget vs Actual',needsLabel:'Needs',savLabel:'Savings',advice:'Personalized Advice'},
+    goals:{title:'My Financial Goals',sub:'Set targets and track your progress.',addGoal:'Add New Goal',goalName:'Goal name',targetAmt:'Target amount',savedSoFar:'Amount saved so far',addBtn:'Add Goal',noGoals:'No goals set yet 🎯',noGoalsSub:'Set your first financial goal above and start tracking progress!',months:'months away',reached:'Goal Reached! 🎉',away:'remaining',addSavings:'Add Savings',progress:'Progress'},
+    converter:{title:'Currency Converter',sub:'Live rates updated daily — powered by ExchangeRate-API.',amount:'Amount',from:'From',to:'To',fetchingRates:'Fetching live rates...',rateError:'Using fallback rates (offline mode).',allRates:'Live Exchange Rates (base: USD)',currency:'Currency',rate:'1 USD =',swap:'Swap',lastUpdate:'Updated'},
+    recurring:{title:'Recurring Expenses',sub:'Fixed monthly bills — added automatically each month.',addNew:'Add Recurring Expense',name:'Name',amount:'Amount (EGP)',category:'Category',dueDay:'Due day of month',addBtn:'Add',noRecurring:'No recurring expenses yet 📋',noRecurringSub:'Add your fixed monthly bills like rent, internet, and subscriptions.',totalMonthly:'Total monthly',upcoming:'Upcoming this week',upcomingNone:'All clear this week ✓'},
+    learn:{title:'Financial Education',sub:'Short, practical articles to build your financial knowledge.',search:'Search articles...'},
+    cats:{food:'Food & Groceries',transport:'Transport',entertainment:'Entertainment',dining:'Eating Out',bills:'Bills & Utilities',health:'Health',clothing:'Clothing',education:'Education',rent:'Rent',subscriptions:'Subscriptions',personal:'Personal Care',savings:'Savings',investment:'Investment',other:'Other'},
+  },
+  ar:{
+    logo:'فين',logoSub:'وايز',
+    nav:{home:'الرئيسية',tracker:'المصاريف',history:'السجل',plan:'خطتي',goals:'أهدافي',converter:'محوّل',recurring:'الثابتة',learn:'تعلّم'},
+    home:{eyebrow:'الوعي المالي للشباب',h1a:'تحكم في',h1b:'فلوسك',h1c:'— قبل ما تتحكم فيك.',sub:'تتبع كل جنيه، ابن ميزانية ذكية، واحصل على نصائح مخصصة. مصمم للشباب.',stat1:'٧٣٪',stat1l:'الشباب بلا ميزانية',stat2:'٢ دقيقة',stat2l:'لإعداد خطتك',stat3:'١٠٠٪',stat3l:'مجاني وخاص',addExp:'أضف مصروف',viewPlan:'شوف خطتي',income:'الدخل الشهري',spent:'مصاريف الشهر',remaining:'المتبقي',savingsRate:'نسبة الادخار',target:'الهدف: ٢٠٪+',overBudget:'تجاوزت الميزانية!',available:'متاح',setFirst:'حدد دخلك في الخطة',recentExp:'آخر المصاريف',noRecent:'لا مصاريف بعد 👀',noRecentSub:'أضف أول مصروف لتبدأ التتبع.',quickAdd:'إضافة سريعة'},
+    tracker:{title:'تتبع المصاريف اليومية',sub:'سجّل مصاريفك — كل جنيه يحسب.',todaySpend:'مصاريف اليوم',transactions:'معاملات',dailyBudget:'الميزانية اليومية',basedOn:'بناءً على خطتك',vsbudget:'الحالة',onTrack:'في المسار ✓',over:'تجاوزت الميزانية',setIncome:'حدد دخلك أولاً',addNew:'إضافة مصروف جديد',amount:'المبلغ (جنيه)',date:'التاريخ',note:'ملاحظة (اختياري)',notePlaceholder:'مثال: غداء في الشغل',category:'الفئة',addBtn:'إضافة المصروف',todayTx:'معاملات اليوم',noTodayExp:'لا مصاريف اليوم 🎉',noTodayExpSub:'لم تنفق شيئاً اليوم. عمل رائع!',missingFields:'من فضلك أدخل المبلغ والفئة.',invalidAmt:'من فضلك أدخل مبلغاً صحيحاً.',budgetAlert:'🚨 تجاوزت ٨٠٪ من دخلك الشهري!',budgetWarn:'⚠️ أنت قريب من حد الإنفاق.',added:'تم إضافة المصروف',inCat:'في فئة',calculator:'حاسبة سريعة',useResult:'استخدم هذا المبلغ'},
+    history:{title:'سجل المعاملات',sub:'كل مصاريفك في مكان واحد.',monthly:'مقارنة شهر بشهر',catBreak:'توزيع الفئات',allMonths:'كل الشهور',allCats:'كل الفئات',total:'الإجمالي',date:'التاريخ',category:'الفئة',note:'ملاحظة',amount:'المبلغ',noData:'لا بيانات بعد — أضف مصاريف لترى الرسم البياني',noTx:'لا توجد معاملات',noTxFound:'لا توجد معاملات مطابقة 🔍',noTxFoundSub:'جرب تغيير الفلاتر.',exportPDF:'تصدير PDF',exportExcel:'تصدير Excel',exportTitle:'تقرير شهري'},
+    plan:{title:'خطتي المالية',sub:'ميزانيتك الشخصية وخارطة طريقك.',incomeSetup:'إعداد الدخل الشهري',netIncome:'صافي الدخل الشهري (جنيه)',savePlan:'حفظ الخطة',savedBtn:'تم الحفظ!',livingExp:'مصاريف المعيشة',monthlySav:'الادخار الشهري',investments:'الاستثمارات',healthScore:'درجة الصحة المالية',great:'وضعك ممتاز! 🎉',room:'يمكن تحسينه',needs:'يحتاج انتباه ⚠️',basedOn:'بناءً على دخلك ومصاريفك هذا الشهر.',budgetVsActual:'الميزانية مقابل الفعلي',needsLabel:'الاحتياجات',savLabel:'الادخار',advice:'نصائح مخصصة'},
+    goals:{title:'أهدافي المالية',sub:'حدد أهدافك وتابع تقدمك.',addGoal:'إضافة هدف جديد',goalName:'اسم الهدف',targetAmt:'المبلغ المستهدف',savedSoFar:'المدخر حتى الآن',addBtn:'إضافة الهدف',noGoals:'لا أهداف بعد 🎯',noGoalsSub:'أضف هدفك المالي الأول وابدأ تتبع تقدمك!',months:'شهر متبقي',reached:'تحقق الهدف! 🎉',away:'متبقي',addSavings:'إضافة مدخرات',progress:'التقدم'},
+    converter:{title:'محوّل العملات',sub:'أسعار لحظية تتحدث يومياً — مدعوم من ExchangeRate-API.',amount:'المبلغ',from:'من',to:'إلى',fetchingRates:'جلب الأسعار اللحظية...',rateError:'نستخدم أسعاراً احتياطية (وضع بدون إنترنت).',allRates:'أسعار الصرف اللحظية (أساس: دولار)',currency:'العملة',rate:'١ دولار =',swap:'عكس',lastUpdate:'آخر تحديث'},
+    recurring:{title:'المصاريف الثابتة الشهرية',sub:'فواتير ثابتة تُضاف تلقائياً كل شهر.',addNew:'إضافة مصروف ثابت',name:'الاسم',amount:'المبلغ (جنيه)',category:'الفئة',dueDay:'يوم الاستحقاق',addBtn:'إضافة',noRecurring:'لا مصاريف ثابتة بعد 📋',noRecurringSub:'أضف فواتيرك الثابتة كالإيجار والإنترنت والاشتراكات.',totalMonthly:'الإجمالي الشهري',upcoming:'المستحقة هذا الأسبوع',upcomingNone:'لا مستحقات هذا الأسبوع ✓'},
+    learn:{title:'التعليم المالي',sub:'مقالات قصيرة وعملية لبناء وعيك المالي.',search:'ابحث عن مقالات...'},
+    cats:{food:'طعام وبقالة',transport:'مواصلات',entertainment:'ترفيه',dining:'أكل خارج',bills:'فواتير',health:'صحة',clothing:'ملابس',education:'تعليم',rent:'إيجار',subscriptions:'اشتراكات',personal:'عناية شخصية',savings:'تحويل مدخرات',investment:'استثمار',other:'أخرى'},
+  }
+};
+
+const EXPENSE_CATS=[
+  {id:'food',icon:'🍽️',color:'#b8f050'},{id:'transport',icon:'🚌',color:'#50c8f0'},
+  {id:'entertainment',icon:'🎬',color:'#f09050'},{id:'dining',icon:'☕',color:'#f05080'},
+  {id:'bills',icon:'💡',color:'#c050f0'},{id:'health',icon:'💊',color:'#50d090'},
+  {id:'clothing',icon:'👗',color:'#f0c050'},{id:'education',icon:'📚',color:'#50a0f0'},
+  {id:'rent',icon:'🏠',color:'#f08050'},{id:'subscriptions',icon:'📺',color:'#80c0f0'},
+  {id:'personal',icon:'💄',color:'#f060c0'},{id:'savings',icon:'🏦',color:'#60d0b0'},
+  {id:'investment',icon:'📈',color:'#60d050'},{id:'other',icon:'📦',color:'#909090'},
+];
+
+const CURRENCIES=[
+  {code:'EGP',flag:'🇪🇬',name:'Egyptian Pound',nameAr:'جنيه مصري'},
+  {code:'USD',flag:'🇺🇸',name:'US Dollar',nameAr:'دولار أمريكي'},
+  {code:'EUR',flag:'🇪🇺',name:'Euro',nameAr:'يورو'},
+  {code:'SAR',flag:'🇸🇦',name:'Saudi Riyal',nameAr:'ريال سعودي'},
+  {code:'ILS',flag:'🇮🇱',name:'Israeli Shekel',nameAr:'شيكل إسرائيلي'},
+];
+
+// Fallback rates base USD
+const FALLBACK_RATES_USD={EGP:53.8,EUR:0.92,SAR:3.75,ILS:3.67,USD:1};
+
+const ARTICLES=[
+  {id:1,icon:'💡',bg:'#1a2010',catColor:'#b8f050',category:'Budgeting',categoryAr:'الميزانية',title:'The 50/30/20 Rule — Adapted for Young Earners',titleAr:'قاعدة ٥٠/٣٠/٢٠ للشباب',desc:'Smart income splitting for young earners.',descAr:'تقسيم ذكي للدخل للشباب.',readTime:'4 min',readTimeAr:'٤ دقائق',
+   content:[{type:'p',text:'With rising costs today, adapt the rule to 60% needs, 20% wants, 20% savings. Pay yourself first — transfer savings the moment your salary arrives.',textAr:'مع ارتفاع تكاليف المعيشة، عدّل القاعدة إلى: ٦٠٪ احتياجات، ٢٠٪ رغبات، ٢٠٪ ادخار. ادفع لنفسك أولاً — حوّل مدخراتك فور وصول الراتب.'},{type:'h4',text:'Why This Works',textAr:'لماذا ينجح هذا'},{type:'p',text:'By automating savings first, you never "forget" to save. You adjust your lifestyle to what remains, not the other way around.',textAr:'بأتمتة الادخار أولاً، لن "تنسى" أبداً أن تدخر. تتكيف مع ما يتبقى، وليس العكس.'}]},
+  {id:2,icon:'📈',bg:'#101828',catColor:'#50c8f0',category:'Investing',categoryAr:'الاستثمار',title:'Where to Invest as a Young Person',titleAr:'أين تستثمر كشاب',desc:'Certificates, gold, stocks — a beginner\'s guide.',descAr:'شهادات، ذهب، أسهم — دليل المبتدئين.',readTime:'6 min',readTimeAr:'٦ دقائق',
+   content:[{type:'h4',text:'Bank Certificates (Safest)',textAr:'شهادات البنوك (الأأمن)'},{type:'p',text:'Many banks offer high-yield savings certificates. Check your local bank for current rates.',textAr:'تقدم كثير من البنوك شهادات ادخار بعوائد مرتفعة. راجع بنكك المحلي للاطلاع على أحدث الأسعار.'},{type:'h4',text:'Gold',textAr:'الذهب'},{type:'p',text:'A strong store of value especially during currency fluctuations. Start with small gram quantities.',textAr:'مخزن قيمة قوي خاصة أثناء تقلبات العملة. ابدأ بكميات صغيرة بالغرام.'}]},
+  {id:3,icon:'🚨',bg:'#1a1010',catColor:'#f09050',category:'Emergency Fund',categoryAr:'صندوق الطوارئ',title:'Why You Need an Emergency Fund Now',titleAr:'لماذا تحتاج صندوق طوارئ الآن',desc:'One expense can destroy months of saving.',descAr:'مصروف واحد يمكنه تدمير شهور من الادخار.',readTime:'3 min',readTimeAr:'٣ دقائق',
+   content:[{type:'p',text:'Target 3-6 months of expenses. Keep it liquid, separate, and never invest it in stocks.',textAr:'استهدف ٣–٦ أشهر من مصاريفك. احتفظ به سائلاً، منفصلاً، ولا تستثمره في الأسهم.'},{type:'h4',text:'Where to Keep It',textAr:'أين تحتفظ به'},{type:'p',text:'A separate savings account in a different bank makes it harder to dip into casually.',textAr:'حساب توفير منفصل في بنك مختلف يجعل الوصول إليه أصعب بشكل غير رسمي.'}]},
+  {id:4,icon:'💳',bg:'#101a18',catColor:'#50d090',category:'Debt',categoryAr:'الديون',title:'Getting Out of Debt — A Practical Guide',titleAr:'الخروج من الديون — دليل عملي',desc:'Pay off debt faster without sacrificing life.',descAr:'سدّد الديون أسرع دون التضحية بحياتك.',readTime:'5 min',readTimeAr:'٥ دقائق',
+   content:[{type:'h4',text:'Avalanche vs Snowball',textAr:'الانهيار الجليدي مقابل كرة الثلج'},{type:'p',text:'Avalanche: attack highest interest first — saves the most money. Snowball: pay smallest balance first — best for motivation.',textAr:'الانهيار الجليدي: اهجم على أعلى فائدة أولاً — يوفر أكثر مالاً. كرة الثلج: اسدد أصغر رصيد أولاً — أفضل للتحفيز.'},{type:'p',text:'Pick whichever you can stick to consistently.',textAr:'اختر الذي يمكنك الالتزام به باستمرار.'}]},
+  {id:5,icon:'🎯',bg:'#181018',catColor:'#c050f0',category:'Goals',categoryAr:'الأهداف',title:'Setting Financial Goals That Actually Work',titleAr:'تحديد أهداف مالية تنجح فعلاً',desc:'Most goals fail because they\'re vague.',descAr:'معظم الأهداف تفشل لأنها مبهمة.',readTime:'4 min',readTimeAr:'٤ دقائق',
+   content:[{type:'p',text:'"Save EGP 500/month for 12 months to build a EGP 6,000 emergency fund by December 2025." That is a goal. "Save money" is a wish.',textAr:'"ادخر ٥٠٠ جنيه شهرياً لمدة ١٢ شهراً لبناء صندوق طوارئ ٦٠٠٠ جنيه بحلول ديسمبر ٢٠٢٥." هذا هدف. "ادخر فلوس" هذه أمنية.'},{type:'h4',text:'Review Monthly',textAr:'راجع شهرياً'},{type:'p',text:'10 minutes each month reviewing your goals keeps you on track and lets you adjust to life changes.',textAr:'١٠ دقائق كل شهر لمراجعة أهدافك تبقيك في المسار وتتيح لك التكيف مع تغييرات الحياة.'}]},
+  {id:6,icon:'🧮',bg:'#101818',catColor:'#50d0b0',category:'Basics',categoryAr:'الأساسيات',title:'Financial Literacy 101',titleAr:'أساسيات الوعي المالي',desc:'Net worth, inflation, compound interest explained.',descAr:'صافي الثروة، التضخم، الفائدة المركبة بالبساطة.',readTime:'7 min',readTimeAr:'٧ دقائق',
+   content:[{type:'h4',text:'Compound Interest',textAr:'الفائدة المركبة'},{type:'p',text:'EGP 1,000 at 25% annually becomes EGP 9,313 in 10 years. The earlier you start, the more powerful this becomes.',textAr:'١٠٠٠ جنيه بفائدة ٢٥٪ سنوياً تصبح ٩٣١٣ جنيه في ١٠ سنوات. كلما بدأت مبكراً، كان أقوى.'},{type:'h4',text:'Inflation',textAr:'التضخم'},{type:'p',text:'If inflation is 30% and your savings earn 10%, you lose 20% in real purchasing power each year.',textAr:'إذا كان التضخم ٣٠٪ وادخارك يربح ١٠٪، فأنت تخسر ٢٠٪ من قوتك الشرائية الحقيقية سنوياً.'}]},
+];
+
+function fmtEGP(n){return 'EGP '+Math.round(n).toLocaleString();}
+function getMonthKey(d){return d.toISOString().slice(0,7);}
+function loadData(){try{const r=localStorage.getItem(STORAGE_KEY);if(r)return JSON.parse(r);}catch(e){}return{income:0,expenses:[],goals:[],recurring:[],ratesCache:null,ratesCacheDate:null,onboardingDone:false};}
+function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}
+
+// ── TOAST ────────────────────────────────────────────
+function ToastContainer({toasts}){
+  return <div className="toast-container-fw">{toasts.map(t=>(
+    <div key={t.id} className="toast-fw">
+      <span style={{fontSize:18}}>{t.icon}</span>
+      <div><div style={{fontWeight:600,fontSize:13,color:'var(--text)'}}>{t.title}</div>{t.msg&&<div style={{color:'var(--text2)',fontSize:12}}>{t.msg}</div>}</div>
+    </div>
+  ))}</div>;
+}
+
+// ── MINI CALCULATOR ──────────────────────────────────
+function MiniCalc({onUse,lang}){
+  const [display,setDisplay]=useState('0');
+  const [expr,setExpr]=useState('');
+  const [flashing,setFlashing]=useState(false);
+  const [key,setKey]=useState(0); // force re-mount for animation
+  const t=T[lang].tracker;
+
+  function press(v){
+    if(v==='C'){setDisplay('0');setExpr('');return;}
+    if(v==='='){
+      try{
+        const res=Function('"use strict";return('+expr+')')();
+        const rounded=Math.round(res*100)/100;
+        setDisplay(String(rounded));setExpr(String(rounded));
+        setFlashing(true);
+        setTimeout(()=>setFlashing(false),400);
+      }catch{setDisplay('Err');setExpr('');}
+      return;
+    }
+    if(v==='⌫'){
+      const ne=expr.slice(0,-1)||'0';
+      setExpr(ne==='0'?'':ne);setDisplay(ne||'0');return;
+    }
+    const ne=expr===''&&(v==='+'||v==='-'||v==='×'||v==='÷')?v:(expr+(v==='×'?'*':v==='÷'?'/':v));
+    setExpr(ne);setDisplay(ne);
+  }
+
+  const btns=[['7','8','9','÷'],['4','5','6','×'],['1','2','3','-'],['0','.','⌫','+'],['C','','','=']];
+  const allBtns=btns.flat();
+
+  return(
+    <div className="calc-wrap">
+      <div style={{fontSize:11,color:'var(--text3)',marginBottom:8,fontWeight:600,textTransform:'uppercase',letterSpacing:1,display:'flex',alignItems:'center',gap:6}}>
+        <i className="bi bi-calculator" style={{color:'var(--accent)'}}></i>
+        {t.calculator}
+      </div>
+      <div className={`calc-display ${flashing?'result-flash':''}`}>
+        {display}
+      </div>
+      <div className="calc-grid">
+        {allBtns.map((b,i)=>{
+          if(b==='')return <div key={i}></div>;
+          const cls=b==='='?'calc-eq':b==='C'?'calc-clr':(b==='+'||b==='-'||b==='×'||b==='÷'||b==='⌫')?'calc-op':'calc-num';
+          const delay=(Math.floor(i/4)*0.04 + (i%4)*0.02).toFixed(2);
+          return(
+            <button key={i}
+              className={`calc-btn ${cls} calc-btn-stagger`}
+              style={{animationDelay:`${delay}s`}}
+              onClick={()=>press(b)}>
+              {b}
+            </button>
+          );
+        })}
+      </div>
+      {display!=='0'&&display!=='Err'&&parseFloat(display)>0&&(
+        <button className="calc-use" onClick={()=>onUse(display)}>
+          ✓ {t.useResult}: <strong>EGP {display}</strong>
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ── QUICK ADD POPUP ──────────────────────────────────
+function QuickAddPopup({onClose,data,setData,addToast,lang}){
+  const t=T[lang];
+  const [amount,setAmount]=useState('');
+  const [category,setCategory]=useState('food');
+  const [note,setNote]=useState('');
+  const [showCalc,setShowCalc]=useState(false);
+  function submit(){
+    const amt=parseFloat(amount);
+    if(!amt||amt<=0){addToast('⚠️',t.tracker.invalidAmt,'');return;}
+    const today=new Date().toISOString().slice(0,10);
+    const newExp={id:Date.now(),amount:amt,category,note,date:today};
+    const nd={...data,expenses:[newExp,...(data.expenses||[])]};
+    setData(nd);saveData(nd);
+    const cat=EXPENSE_CATS.find(c=>c.id===category);
+    addToast('✅',t.tracker.added,`${fmtEGP(amt)} — ${cat?.icon} ${t.cats[category]}`);
+    onClose();
+  }
+  return(
+    <div className="popup-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div className="popup-box">
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+          <div className="popup-title">⚡ {t.home.quickAdd}</div>
+          <button onClick={onClose} style={{background:'none',border:'none',color:'var(--text2)',cursor:'pointer',fontSize:20}}><i className="bi bi-x-lg"></i></button>
+        </div>
+        {showCalc&&<MiniCalc lang={lang} onUse={v=>{setAmount(v);setShowCalc(false);}}/>}
+        <div style={{marginBottom:12}}>
+          <label className="fw-label">{t.tracker.amount}</label>
+          <div style={{display:'flex',gap:8}}>
+            <div className="input-prefix" style={{flex:1}}><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" placeholder="0" value={amount} onChange={e=>setAmount(e.target.value)} autoFocus min="0"/>
+            </div>
+            <button className="icon-btn" onClick={()=>setShowCalc(s=>!s)} title="Calculator" style={{flexShrink:0}}>
+              <i className="bi bi-calculator"></i>
+            </button>
+          </div>
+        </div>
+        <div style={{marginBottom:12}}>
+          <label className="fw-label">{t.tracker.note}</label>
+          <input className="fw-input" placeholder={t.tracker.notePlaceholder} value={note} onChange={e=>setNote(e.target.value)}/>
+        </div>
+        <div style={{marginBottom:16}}>
+          <label className="fw-label">{t.tracker.category}</label>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6,marginTop:5}}>
+            {EXPENSE_CATS.slice(0,8).map(c=>(
+              <button key={c.id} className={`cat-chip ${category===c.id?'selected':''}`}
+                onClick={()=>setCategory(c.id)}
+                style={category===c.id?{borderColor:c.color,color:c.color,background:c.color+'18'}:{}}>
+                {c.icon} {t.cats[c.id]}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{display:'flex',gap:8}}>
+          <button className="btn-fw" style={{flex:1}} onClick={submit}><i className="bi bi-plus-circle"></i>{t.tracker.addBtn}</button>
+          <button className="btn-fw-outline" onClick={onClose}>{lang==='en'?'Cancel':'إلغاء'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+// ── EXPANDING BOTTOM NAV ─────────────────────────────
+function ExpandingNav({page,setPage,lang,theme,toggleTheme,toggleLang,alerts,onQuickAdd}){
+  const t=T[lang].nav;
+  const tabs=[
+    {id:'home',icon:'bi-house-fill',label:t.home},
+    {id:'tracker',icon:'bi-wallet2',label:t.tracker},
+    {id:'history',icon:'bi-clock-history',label:t.history},
+    {id:'plan',icon:'bi-bar-chart-line',label:t.plan},
+    {id:'goals',icon:'bi-flag-fill',label:t.goals},
+    {id:'converter',icon:'bi-currency-exchange',label:t.converter},
+    {id:'recurring',icon:'bi-arrow-repeat',label:t.recurring},
+    {id:'learn',icon:'bi-book-fill',label:t.learn},
+  ];
+  return(
+    <div className="exp-nav">
+      {tabs.map(tb=>(
+        <button key={tb.id}
+          className={`exp-link ${page===tb.id?'exp-active':''} ${alerts[tb.id]?'has-alert':''}`}
+          onClick={()=>setPage(tb.id)}
+          title={tb.label}>
+          <i className={`bi ${tb.icon} exp-icon`}></i>
+          <span className="exp-label">{tb.label}</span>
+          <span className="exp-alert"></span>
+        </button>
+      ))}
+      <div className="exp-sep"></div>
+      <div className="exp-actions">
+        <button className="exp-quick-btn" onClick={onQuickAdd} title="Quick Add">＋</button>
+        <button className="exp-action-btn" onClick={toggleLang} title="Language" style={{fontSize:11,fontWeight:700}}>
+          {lang==='en'?'ع':'EN'}
+        </button>
+        <button className="exp-action-btn" onClick={toggleTheme} title="Theme">
+          <i className={`bi ${theme==='dark'?'bi-sun':'bi-moon'}`}></i>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── NAVBAR ───────────────────────────────────────────
+function Navbar({page,setPage,theme,toggleTheme,lang,toggleLang,alerts,onQuickAdd}){
+  const t=T[lang].nav;
+  const tabs=[
+    {id:'home',icon:'bi-house',label:t.home},
+    {id:'tracker',icon:'bi-wallet2',label:t.tracker},
+    {id:'history',icon:'bi-clock-history',label:t.history},
+    {id:'plan',icon:'bi-bar-chart-line',label:t.plan},
+    {id:'goals',icon:'bi-flag',label:t.goals},
+    {id:'converter',icon:'bi-currency-exchange',label:t.converter},
+    {id:'recurring',icon:'bi-arrow-repeat',label:t.recurring},
+    {id:'learn',icon:'bi-book',label:t.learn},
+  ];
+  return(
+    <nav className="fw-nav">
+      <div className="fw-logo" onClick={()=>setPage('home')}>Fin<span>Wise</span></div>
+      <div className="nav-tabs-fw">
+        {tabs.map(tb=>(
+          <button key={tb.id} className={`nav-tab-fw ${page===tb.id?'active':''} ${alerts[tb.id]?'has-alert':''}`} onClick={()=>setPage(tb.id)}>
+            <i className={`bi ${tb.icon}`}></i>{tb.label}<span className="badge-dot"></span>
+          </button>
+        ))}
+      </div>
+      <div className="nav-right">
+        <button className="quick-add-fab" onClick={onQuickAdd} title="Quick Add">＋</button>
+        <button className="lang-btn" onClick={toggleLang}>{lang==='en'?'عربي':'EN'}</button>
+        <button className="icon-btn" onClick={toggleTheme}><i className={`bi ${theme==='dark'?'bi-sun':'bi-moon'}`}></i></button>
+      </div>
+    </nav>
+  );
+}
+
+// ── HOME ─────────────────────────────────────────────
+function HomePage({setPage,data,lang,onQuickAdd}){
+  const t=T[lang].home;
+  const thisMonth=getMonthKey(new Date());
+  const monthExp=(data.expenses||[]).filter(e=>e.date.startsWith(thisMonth)).reduce((s,e)=>s+e.amount,0);
+  const surplus=data.income-monthExp;
+  const savingsRate=data.income>0?(surplus/data.income)*100:0;
+  const recentExp=(data.expenses||[]).slice(0,3);
+  return(
+    <div style={{padding:'32px 24px',maxWidth:920,margin:'0 auto'}}>
+      <div style={{background:'var(--bg3)',border:'1px solid var(--border)',borderRadius:18,padding:'36px',marginBottom:24,position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px)',backgroundSize:'40px 40px',opacity:.4,pointerEvents:'none'}}></div>
+        <div style={{position:'relative'}}>
+          <div className="hero-eyebrow">{t.eyebrow}</div>
+          <h1 className="hero-h1">{t.h1a} <span className="accent">{t.h1b}</span><br/>{t.h1c}</h1>
+          <p className="hero-sub">{t.sub}</p>
+          <div className="hero-stats-row">
+            {[[t.stat1,t.stat1l],[t.stat2,t.stat2l],[t.stat3,t.stat3l]].map(([n,l],i)=>(
+              <div key={i} className="hero-stat"><div className="hero-stat-num">{n}</div><div className="hero-stat-label">{l}</div></div>
+            ))}
+          </div>
+          <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
+            <button className="btn-fw" onClick={onQuickAdd}><i className="bi bi-lightning-charge"></i>{t.quickAdd}</button>
+            <button className="btn-fw-outline" onClick={()=>setPage('tracker')}><i className="bi bi-wallet2"></i>{t.addExp}</button>
+            <button className="btn-fw-outline" onClick={()=>setPage('plan')}><i className="bi bi-bar-chart-line"></i>{t.viewPlan}</button>
+          </div>
+        </div>
+      </div>
+
+      {data.income>0&&(
+        <div className="row g-3 mb-3">
+          {[
+            {label:t.income,val:fmtEGP(data.income),sub:'',cls:'c-success'},
+            {label:t.spent,val:fmtEGP(monthExp),sub:data.income>0?Math.round(monthExp/data.income*100)+'% of income':'',cls:'c-accent3'},
+            {label:t.remaining,val:fmtEGP(Math.abs(surplus)),sub:surplus<0?t.overBudget:t.available,cls:surplus<0?'c-danger':'c-accent'},
+            {label:t.savingsRate,val:Math.round(savingsRate)+'%',sub:t.target,cls:savingsRate>=20?'c-success':savingsRate>=10?'c-warning':'c-danger'},
+          ].map((m,i)=>(
+            <div key={i} className="col-md-3 col-6">
+              <div className="metric-card">
+                <div className="metric-label">{m.label}</div>
+                <div className={`metric-val ${m.cls}`}>{m.val}</div>
+                <div className="metric-sub">{m.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="row g-3">
+        <div className="col-md-6">
+          <div className="fw-card">
+            <div className="fw-card-title">{t.recentExp}</div>
+            {recentExp.length===0?(
+              <div className="empty-state" style={{padding:'24px 0'}}>
+                <span className="es-icon">👀</span>
+                <div className="es-title">{t.noRecent}</div>
+                <div className="es-sub">{t.noRecentSub}</div>
+              </div>
+            ):(
+              recentExp.map(e=>{
+                const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+                return(
+                  <div key={e.id} className="recent-exp-item">
+                    <div style={{display:'flex',alignItems:'center',gap:10}}>
+                      <div style={{width:34,height:34,borderRadius:8,background:cat?.color+'22',display:'flex',alignItems:'center',justifyContent:'center',fontSize:16}}>{cat?.icon}</div>
+                      <div>
+                        <div style={{fontSize:13,fontWeight:500}}>{T[lang].cats[e.category]||e.category}</div>
+                        <div style={{fontSize:11,color:'var(--text3)'}}>{e.note||e.date}</div>
+                      </div>
+                    </div>
+                    <div style={{fontFamily:'var(--ff-head)',fontWeight:700,color:'var(--accent3)',fontSize:14}}>{fmtEGP(e.amount)}</div>
+                  </div>
+                );
+              })
+            )}
+            <button className="btn-fw-outline" style={{width:'100%',marginTop:12,justifyContent:'center'}} onClick={()=>setPage('tracker')}>
+              <i className="bi bi-plus-circle"></i>{t.addExp}
+            </button>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="row g-3">
+            {[
+              {icon:'bi-flag',title:T[lang].nav.goals,desc:lang==='en'?'Track financial goals':'تتبع الأهداف المالية',page:'goals',c:'var(--success)'},
+              {icon:'bi-currency-exchange',title:T[lang].nav.converter,desc:lang==='en'?'Live currency rates':'أسعار عملات لحظية',page:'converter',c:'var(--accent2)'},
+              {icon:'bi-arrow-repeat',title:T[lang].nav.recurring,desc:lang==='en'?'Fixed monthly bills':'الفواتير الشهرية الثابتة',page:'recurring',c:'var(--accent3)'},
+              {icon:'bi-book',title:T[lang].nav.learn,desc:lang==='en'?'Financial education articles':'مقالات تعليمية مالية',page:'learn',c:'var(--accent)'},
+            ].map(c=>(
+              <div key={c.page} className="col-6">
+                <div className="fw-card" style={{cursor:'pointer',padding:'14px 16px',transition:'transform .2s'}}
+                  onClick={()=>setPage(c.page)}
+                  onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-2px)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform='';}}>
+                  <div style={{width:36,height:36,borderRadius:9,background:c.c+'22',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,color:c.c,marginBottom:8}}><i className={`bi ${c.icon}`}></i></div>
+                  <div style={{fontFamily:'var(--ff-head)',fontWeight:600,fontSize:13,marginBottom:2}}>{c.title}</div>
+                  <div style={{fontSize:12,color:'var(--text2)'}}>{c.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <SmartInsights data={data} lang={lang}/>
+      <div className="motiv-strip">
+        <span style={{fontSize:28}}>🔥</span>
+        <div>
+          <div style={{fontSize:13,fontWeight:600,marginBottom:2}}>{lang==='en'?'Keep building your financial future!':'استمر في بناء مستقبلك المالي!'}</div>
+          <div style={{fontSize:12,color:'var(--text2)'}}>
+            {lang==='en'?'"A penny saved is a penny earned." — Benjamin Franklin':'"الجنيه المدخر هو جنيه مكتسب." — بنجامين فرانكلين'}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── TRACKER ──────────────────────────────────────────
+function EditExpenseModal({expense,data,setData,addToast,lang,onClose}){
+  const t=T[lang].tracker; const tCats=T[lang].cats;
+  const [amount,setAmount]=useState(String(expense.amount));
+  const [category,setCategory]=useState(expense.category);
+  const [note,setNote]=useState(expense.note||'');
+  const [date,setDate]=useState(expense.date);
+  // Escape to close
+  useEffect(()=>{
+    const h=e=>{if(e.key==='Escape')onClose();};
+    window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);
+  },[]);
+  function save(){
+    const amt=parseFloat(amount);
+    if(!amt||amt<=0||!category){addToast('⚠️',t.invalidAmt,'');return;}
+    const updated={...expense,amount:amt,category,note,date};
+    const nd={...data,expenses:data.expenses.map(e=>e.id===expense.id?updated:e)};
+    setData(nd);saveData(nd);
+    addToast('✅',lang==='en'?'Expense updated!':'تم تحديث المصروف!','');
+    onClose();
+  }
+  return(
+    <div className="popup-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div className="popup-box" style={{maxWidth:440}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:18}}>
+          <div className="popup-title">✏️ {lang==='en'?'Edit Expense':'تعديل المصروف'}</div>
+          <button onClick={onClose} style={{background:'none',border:'none',color:'var(--text2)',cursor:'pointer',fontSize:20}}><i className="bi bi-x-lg"></i></button>
+        </div>
+        <div className="row g-2 mb-3">
+          <div className="col-6">
+            <label className="fw-label">{t.amount}</label>
+            <div className="input-prefix"><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" value={amount} onChange={e=>setAmount(e.target.value)} autoFocus/>
+            </div>
+          </div>
+          <div className="col-6">
+            <label className="fw-label">{t.date}</label>
+            <input className="fw-input" type="date" value={date} onChange={e=>setDate(e.target.value)}/>
+          </div>
+        </div>
+        <div className="mb-3">
+          <label className="fw-label">{t.note}</label>
+          <input className="fw-input" value={note} onChange={e=>setNote(e.target.value)} placeholder={t.notePlaceholder}/>
+        </div>
+        <div className="mb-3">
+          <label className="fw-label">{t.category}</label>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6,marginTop:5}}>
+            {EXPENSE_CATS.map(cat=>(
+              <button key={cat.id} className={`cat-chip ${category===cat.id?'selected':''}`}
+                onClick={()=>setCategory(cat.id)}
+                style={category===cat.id?{borderColor:cat.color,color:cat.color,background:cat.color+'18'}:{}}>
+                {cat.icon} {tCats[cat.id]}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{display:'flex',gap:8}}>
+          <button className="btn-fw" style={{flex:1}} onClick={save}><i className="bi bi-check2"></i>{lang==='en'?'Save changes':'حفظ التغييرات'}</button>
+          <button className="btn-fw-outline" onClick={onClose}>{lang==='en'?'Cancel':'إلغاء'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TrackerPage({data,setData,addToast,lang}){
+  const t=T[lang].tracker; const tCats=T[lang].cats;
+  const [amount,setAmount]=useState('');
+  const [category,setCategory]=useState('');
+  const [note,setNote]=useState('');
+  const [date,setDate]=useState(new Date().toISOString().slice(0,10));
+  const [showCalc,setShowCalc]=useState(false);
+  const [search,setSearch]=useState('');
+  const [editExp,setEditExp]=useState(null);
+  const today=new Date().toISOString().slice(0,10);
+
+  // All expenses filtered by search — shown in table
+  const allExp=(data.expenses||[]).filter(e=>{
+    if(!search.trim())return e.date===today;
+    const q=search.toLowerCase();
+    const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+    return (
+      (tCats[e.category]||'').toLowerCase().includes(q)||
+      (e.note||'').toLowerCase().includes(q)||
+      String(e.amount).includes(q)||
+      e.date.includes(q)||
+      (cat?.icon||'').includes(q)
+    );
+  });
+
+  const todayExp=(data.expenses||[]).filter(e=>e.date===today);
+  const todayTotal=todayExp.reduce((s,e)=>s+e.amount,0);
+
+  function addExpense(){
+    if(!amount||!category){addToast('⚠️',t.missingFields,'');return;}
+    const amt=parseFloat(amount);
+    if(isNaN(amt)||amt<=0){addToast('⚠️',t.invalidAmt,'');return;}
+    const newExp={id:Date.now(),amount:amt,category,note,date};
+    const nd={...data,expenses:[newExp,...(data.expenses||[])]};
+    setData(nd);saveData(nd);
+    const mk=date.slice(0,7);
+    const mTotal=nd.expenses.filter(e=>e.date.startsWith(mk)).reduce((s,e)=>s+e.amount,0);
+    const budget=nd.income*.80;
+    if(mTotal>budget)addToast('🚨',t.budgetAlert,'');
+    else if(mTotal>budget*.9)addToast('⚠️',t.budgetWarn,'');
+    else addToast('✅',t.added,`${fmtEGP(amt)} ${t.inCat} ${tCats[category]||category}`);
+    setAmount('');setNote('');setCategory('');
+  }
+
+  return(
+    <div className='page-enter' style={{padding:'32px 24px',maxWidth:900,margin:'0 auto'}}>
+      {editExp&&<EditExpenseModal expense={editExp} data={data} setData={setData} addToast={addToast} lang={lang} onClose={()=>setEditExp(null)}/>}
+      <div style={{marginBottom:22,display:'flex',alignItems:'flex-start',justifyContent:'space-between',flexWrap:'wrap',gap:10}}>
+        <div>
+          <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+          <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+        </div>
+      </div>
+      <div className="row g-3 mb-4">
+        <div className="col-md-4"><div className="metric-card">
+          <div className="metric-label">{t.todaySpend}</div>
+          <div className="metric-val c-accent3">{fmtEGP(todayTotal)}</div>
+          <div className="metric-sub">{todayExp.length} {t.transactions}</div>
+        </div></div>
+        <div className="col-md-4"><div className="metric-card">
+          <div className="metric-label">{t.dailyBudget}</div>
+          <div className="metric-val c-accent">{data.income>0?fmtEGP(data.income*.6/30):t.setIncome}</div>
+          <div className="metric-sub">{t.basedOn}</div>
+        </div></div>
+        <div className="col-md-4"><div className="metric-card">
+          <div className="metric-label">{t.vsbudget}</div>
+          <div className={`metric-val ${data.income>0&&todayTotal>data.income*.6/30?'c-danger':'c-success'}`} style={{fontSize:16,marginTop:6}}>
+            {data.income>0?(todayTotal<=data.income*.6/30?t.onTrack:t.over):'—'}
+          </div>
+        </div></div>
+      </div>
+
+      <div className="fw-card mb-4">
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+          <div className="fw-card-title" style={{marginBottom:0}}>{t.addNew}</div>
+          <button className="btn-fw-outline" style={{padding:'6px 12px',fontSize:12}} onClick={()=>setShowCalc(s=>!s)}>
+            <i className="bi bi-calculator"></i>{showCalc?(lang==='en'?'Hide':'إخفاء'):(lang==='en'?'Calculator':'حاسبة')}
+          </button>
+        </div>
+        {showCalc&&<MiniCalc lang={lang} onUse={v=>{setAmount(v);setShowCalc(false);}}/>}
+        <div className="row g-3 mb-3">
+          <div className="col-md-3">
+            <label className="fw-label">{t.amount}</label>
+            <div className="input-prefix"><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" placeholder="0" value={amount} onChange={e=>setAmount(e.target.value)} min="0"/>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <label className="fw-label">{t.date}</label>
+            <input className="fw-input" type="date" value={date} onChange={e=>setDate(e.target.value)}/>
+          </div>
+          <div className="col-md-6">
+            <label className="fw-label">{t.note}</label>
+            <input className="fw-input" placeholder={t.notePlaceholder} value={note} onChange={e=>setNote(e.target.value)}/>
+          </div>
+        </div>
+        <div style={{marginBottom:14}}>
+          <label className="fw-label">{t.category}</label>
+          <div style={{display:'flex',flexWrap:'wrap',gap:7,marginTop:5}}>
+            {EXPENSE_CATS.map(cat=>(
+              <button key={cat.id} className={`cat-chip ${category===cat.id?'selected':''}`}
+                onClick={()=>setCategory(cat.id)}
+                style={category===cat.id?{borderColor:cat.color,color:cat.color,background:cat.color+'18'}:{}}>
+                {cat.icon} {tCats[cat.id]}
+              </button>
+            ))}
+          </div>
+        </div>
+        <button className="btn-fw" onClick={addExpense}><i className="bi bi-plus-circle"></i>{t.addBtn}</button>
+      </div>
+
+      <div className="fw-card">
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14,flexWrap:'wrap',gap:10}}>
+          <div className="fw-card-title" style={{marginBottom:0}}>
+            {search.trim()?(lang==='en'?`Search results (${allExp.length})`:`نتائج البحث (${allExp.length})`):t.todayTx}
+          </div>
+          <div style={{position:'relative',minWidth:200}}>
+            <i className="bi bi-search" style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:'var(--text3)',fontSize:13}}></i>
+            <input className="fw-input" style={{paddingLeft:30,paddingTop:7,paddingBottom:7,fontSize:13}}
+              placeholder={lang==='en'?'Search expenses...':'ابحث عن مصروف...'}
+              value={search} onChange={e=>setSearch(e.target.value)}/>
+            {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',color:'var(--text3)',cursor:'pointer',fontSize:14,padding:0}}><i className="bi bi-x"></i></button>}
+          </div>
+        </div>
+        {allExp.length===0?(
+          <div className="empty-state">
+            <span className="es-icon">{search?'🔍':'🎉'}</span>
+            <div className="es-title">{search?(lang==='en'?'No results found':'لا توجد نتائج'):t.noTodayExp}</div>
+            <div className="es-sub">{search?(lang==='en'?'Try a different search term':'جرّب كلمة بحث مختلفة'):t.noTodayExpSub}</div>
+          </div>
+        ):(
+          <table className="fw-table">
+            <thead><tr>
+              <th>{t.date}</th><th>{t.category}</th><th>{t.note}</th>
+              <th style={{textAlign:'right'}}>{t.amount}</th><th></th>
+            </tr></thead>
+            <tbody>{allExp.map(e=>{
+              const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+              return(<tr key={e.id}>
+                <td style={{color:'var(--text3)',fontSize:12}}>{e.date}</td>
+                <td><span style={{display:'inline-flex',alignItems:'center',gap:7}}>
+                  <span style={{width:8,height:8,borderRadius:'50%',background:cat?.color||'#888',display:'inline-block',flexShrink:0}}></span>
+                  {cat?.icon} {tCats[e.category]||e.category}
+                </span></td>
+                <td style={{color:'var(--text2)'}}>{e.note||'—'}</td>
+                <td style={{textAlign:'right',fontWeight:600,color:'var(--accent3)'}}>{fmtEGP(e.amount)}</td>
+                <td>
+                  <div style={{display:'flex',gap:5}}>
+                    <button style={{background:'none',border:'1px solid var(--border2)',borderRadius:6,padding:'4px 8px',color:'var(--text2)',cursor:'pointer',fontSize:12,transition:'all .15s'}}
+                      onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--accent)';e.currentTarget.style.color='var(--accent)';}}
+                      onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border2)';e.currentTarget.style.color='var(--text2)';}}
+                      onClick={()=>setEditExp(e)}>
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                    <button className="btn-danger" onClick={()=>{const nd={...data,expenses:data.expenses.filter(x=>x.id!==e.id)};setData(nd);saveData(nd);}}>
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>);
+            })}</tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── HISTORY + EXPORT ─────────────────────────────────
+function HistoryPage({data,lang}){
+  const t=T[lang].history;
+  const [filterCat,setFilterCat]=useState('all');
+  const [filterMonth,setFilterMonth]=useState('all');
+  const [dateFrom,setDateFrom]=useState('');
+  const [dateTo,setDateTo]=useState('');
+  const [showDateRange,setShowDateRange]=useState(false);
+  const chartRef=useRef(null);const chartInst=useRef(null);
+  const catChartRef=useRef(null);const catChartInst=useRef(null);
+  const months=[...new Set((data.expenses||[]).map(e=>e.date.slice(0,7)))].sort().reverse();
+
+  // Escape closes date range
+  useEffect(()=>{
+    const h=e=>{if(e.key==='Escape'&&showDateRange)setShowDateRange(false);};
+    window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);
+  },[showDateRange]);
+
+  const filtered=(data.expenses||[]).filter(e=>{
+    const catOk=filterCat==='all'||e.category===filterCat;
+    const monOk=filterMonth==='all'||e.date.startsWith(filterMonth);
+    const fromOk=!dateFrom||e.date>=dateFrom;
+    const toOk=!dateTo||e.date<=dateTo;
+    return catOk&&monOk&&fromOk&&toOk;
+  });
+  const totalFiltered=filtered.reduce((s,e)=>s+e.amount,0);
+
+  useEffect(()=>{
+    if(!chartRef.current)return;
+    if(chartInst.current)chartInst.current.destroy();
+    const last6=[...new Set((data.expenses||[]).map(e=>e.date.slice(0,7)))].sort().slice(-6);
+    if(!last6.length)return;
+    const mTotals=last6.map(m=>({month:m,total:(data.expenses||[]).filter(e=>e.date.startsWith(m)).reduce((s,e)=>s+e.amount,0)}));
+    chartInst.current=new Chart(chartRef.current,{type:'bar',data:{
+      labels:mTotals.map(m=>{const d=new Date(m.month+'-01');return d.toLocaleString('default',{month:'short',year:'2-digit'});}),
+      datasets:[{label:'Spending',data:mTotals.map(m=>m.total),backgroundColor:mTotals.map((_,i)=>i===mTotals.length-1?'#b8f050':'rgba(184,240,80,.3)'),borderRadius:6,borderSkipped:false}]
+    },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' EGP '+Math.round(ctx.raw).toLocaleString()}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#9199ad'}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#9199ad',callback:v=>'EGP'+Math.round(v/1000)+'k'}}}}});
+  },[data.expenses]);
+
+  useEffect(()=>{
+    if(!catChartRef.current)return;
+    if(catChartInst.current)catChartInst.current.destroy();
+    const catTotals={};
+    filtered.forEach(e=>{catTotals[e.category]=(catTotals[e.category]||0)+e.amount;});
+    const cats=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    if(!cats.length)return;
+    catChartInst.current=new Chart(catChartRef.current,{type:'doughnut',data:{
+      labels:cats.map(([id])=>T[lang].cats[id]||id),
+      datasets:[{data:cats.map(([,v])=>v),backgroundColor:cats.map(([id])=>EXPENSE_CATS.find(c=>c.id===id)?.color||'#888'),borderWidth:0,borderRadius:3}]
+    },options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' EGP '+Math.round(ctx.raw).toLocaleString()}}}}});
+  },[filtered]);
+
+  function exportPDF(){
+    try{
+      const {jsPDF}=window.jspdf;
+      const doc=new jsPDF();
+      const month=filterMonth==='all'?'All Months':new Date(filterMonth+'-01').toLocaleString('default',{month:'long',year:'numeric'});
+      doc.setFontSize(20);doc.setTextColor(40,40,40);
+      doc.text('FinWise — '+t.exportTitle,20,20);
+      doc.setFontSize(12);doc.setTextColor(100,100,100);
+      doc.text(month,20,30);
+      doc.text('Total: EGP '+Math.round(totalFiltered).toLocaleString(),20,38);
+      doc.setFontSize(10);
+      let y=52;
+      doc.setFillColor(240,240,240);doc.rect(15,44,180,7,'F');
+      doc.setTextColor(60,60,60);doc.setFontSize(9);
+      doc.text('Date',18,49);doc.text('Category',55,49);doc.text('Note',105,49);doc.text('Amount (EGP)',155,49);
+      doc.setTextColor(40,40,40);
+      filtered.forEach(e=>{
+        if(y>275){doc.addPage();y=20;}
+        const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+        doc.text(e.date,18,y);
+        doc.text((cat?.label||e.category).slice(0,20),55,y);
+        doc.text((e.note||'').slice(0,30),105,y);
+        doc.text('EGP '+Math.round(e.amount).toLocaleString(),155,y);
+        y+=7;
+        doc.setDrawColor(220,220,220);doc.line(15,y-2,195,y-2);
+      });
+      doc.save('finwise-report.pdf');
+    }catch(err){alert('PDF export failed: '+err.message);}
+  }
+
+  function exportExcel(){
+    try{
+      const rows=filtered.map(e=>{
+        const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+        return{Date:e.date,Category:cat?.label||e.category,Note:e.note||'',Amount:e.amount};
+      });
+      // Monthly summary sheet
+      const monthMap={};
+      filtered.forEach(e=>{const m=e.date.slice(0,7);monthMap[m]=(monthMap[m]||0)+e.amount;});
+      const summary=Object.entries(monthMap).map(([m,total])=>({Month:m,Total:total}));
+      const wb=XLSX.utils.book_new();
+      const ws=XLSX.utils.json_to_sheet(rows);
+      const ws2=XLSX.utils.json_to_sheet(summary);
+      XLSX.utils.book_append_sheet(wb,ws,'Transactions');
+      XLSX.utils.book_append_sheet(wb,ws2,'Monthly Summary');
+      XLSX.writeFile(wb,'finwise-report.xlsx');
+    }catch(err){alert('Excel export failed: '+err.message);}
+  }
+
+  return(
+    <div style={{padding:'32px 24px',maxWidth:980,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+      <div className="row g-3 mb-4">
+        <div className="col-md-6"><div className="fw-card" style={{height:220}}>
+          <div className="fw-card-title">{t.monthly}</div>
+          <div className="chart-container" style={{height:165}}>
+            {!(data.expenses||[]).length?
+              <div className="empty-state" style={{height:'100%',padding:'0',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+                <span style={{fontSize:28}}>📊</span><div style={{fontSize:12,color:'var(--text3)',marginTop:8}}>{t.noData}</div>
+              </div>
+              :<canvas ref={chartRef} aria-label="Monthly chart">Monthly spending.</canvas>}
+          </div>
+        </div></div>
+        <div className="col-md-6"><div className="fw-card" style={{height:220}}>
+          <div className="fw-card-title">{t.catBreak}</div>
+          <div className="chart-container" style={{height:165}}>
+            {!filtered.length?
+              <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100%',color:'var(--text3)',fontSize:12}}>{t.noTx}</div>
+              :<canvas ref={catChartRef} aria-label="Category chart">Category.</canvas>}
+          </div>
+        </div></div>
+      </div>
+      <div className="fw-card">
+        <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'center',marginBottom:14}}>
+          <select className="fw-select" style={{width:'auto'}} value={filterMonth} onChange={e=>{setFilterMonth(e.target.value);setDateFrom('');setDateTo('');}}>
+            <option value="all">{t.allMonths}</option>
+            {months.map(m=><option key={m} value={m}>{new Date(m+'-01').toLocaleString('default',{month:'long',year:'numeric'})}</option>)}
+          </select>
+          <select className="fw-select" style={{width:'auto'}} value={filterCat} onChange={e=>setFilterCat(e.target.value)}>
+            <option value="all">{t.allCats}</option>
+            {EXPENSE_CATS.map(c=><option key={c.id} value={c.id}>{c.icon} {T[lang].cats[c.id]}</option>)}
+          </select>
+          <button className="btn-export"
+            style={(dateFrom||dateTo)?{borderColor:'var(--accent)',color:'var(--accent)'}:{}}
+            onClick={()=>setShowDateRange(s=>!s)}>
+            <i className="bi bi-calendar-range"></i>
+            {dateFrom&&dateTo?`${dateFrom} → ${dateTo}`:(lang==='en'?'Date range':'نطاق تاريخ')}
+            {(dateFrom||dateTo)&&<button onClick={e=>{e.stopPropagation();setDateFrom('');setDateTo('');}} style={{background:'none',border:'none',color:'inherit',cursor:'pointer',marginLeft:4,fontSize:12,padding:0}}>✕</button>}
+          </button>
+          {showDateRange&&(
+            <div style={{position:'absolute',marginTop:44,background:'var(--card-bg)',border:'1px solid var(--border2)',borderRadius:12,padding:16,zIndex:100,boxShadow:'0 8px 24px rgba(0,0,0,.3)',display:'flex',gap:12,alignItems:'flex-end',flexWrap:'wrap'}}>
+              <div>
+                <label className="fw-label">{lang==='en'?'From':'من'}</label>
+                <input className="fw-input" type="date" value={dateFrom} onChange={e=>{setDateFrom(e.target.value);setFilterMonth('all');}}/>
+              </div>
+              <div>
+                <label className="fw-label">{lang==='en'?'To':'إلى'}</label>
+                <input className="fw-input" type="date" value={dateTo} onChange={e=>{setDateTo(e.target.value);setFilterMonth('all');}}/>
+              </div>
+              <button className="btn-sm" onClick={()=>setShowDateRange(false)}>{lang==='en'?'Apply':'تطبيق'}</button>
+            </div>
+          )}
+          <div style={{marginLeft:'auto',display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
+            <span style={{fontFamily:'var(--ff-head)',fontSize:15,color:'var(--accent3)'}}>{t.total}: {fmtEGP(totalFiltered)}</span>
+            <button className="btn-export" onClick={exportPDF}><i className="bi bi-file-earmark-pdf"></i>{t.exportPDF}</button>
+            <button className="btn-export" onClick={exportExcel}><i className="bi bi-file-earmark-excel"></i>{t.exportExcel}</button>
+          </div>
+        </div>
+        {!filtered.length?(
+          <div className="empty-state">
+            <span className="es-icon">🔍</span>
+            <div className="es-title">{t.noTxFound}</div>
+            <div className="es-sub">{t.noTxFoundSub}</div>
+          </div>
+        ):(
+          <table className="fw-table">
+            <thead><tr><th>{t.date}</th><th>{t.category}</th><th>{t.note}</th><th style={{textAlign:'right'}}>{t.amount}</th></tr></thead>
+            <tbody>{filtered.map(e=>{
+              const cat=EXPENSE_CATS.find(c=>c.id===e.category);
+              return(<tr key={e.id}>
+                <td style={{color:'var(--text2)'}}>{new Date(e.date+'T00:00:00').toLocaleDateString('en-EG',{day:'numeric',month:'short'})}</td>
+                <td><span style={{display:'inline-flex',alignItems:'center',gap:8}}><span style={{width:8,height:8,borderRadius:'50%',background:cat?.color||'#888',display:'inline-block'}}></span>{cat?.icon} {T[lang].cats[e.category]||e.category}</span></td>
+                <td style={{color:'var(--text2)'}}>{e.note||'—'}</td>
+                <td style={{textAlign:'right',fontWeight:600,color:'var(--accent3)'}}>{fmtEGP(e.amount)}</td>
+              </tr>);
+            })}</tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── PLAN ────────────────────────────────────────────
+function PlanPage({data,setData,addToast,lang}){
+  const t=T[lang].plan;
+  const [income,setIncome]=useState(data.income>0?String(data.income):'');
+  const [savedBtn,setSavedBtn]=useState(false);
+  function savePlan(){
+    const inc=parseFloat(income);
+    if(!inc||inc<=0){addToast('⚠️',t.netIncome,'');return;}
+    const nd={...data,income:inc};setData(nd);saveData(nd);
+    setSavedBtn(true);addToast('✅',t.savedBtn,'');setTimeout(()=>setSavedBtn(false),2000);
+  }
+  const inc=parseFloat(income)||0;
+  let sp=.60,sa=.20,iv=.20;
+  if(inc<5000){sp=.65;sa=.25;iv=.10;}else if(inc<10000){sp=.60;sa=.22;iv=.18;}else if(inc<20000){sp=.55;sa=.23;iv=.22;}else{sp=.50;sa=.25;iv=.25;}
+  const thisMonth=getMonthKey(new Date());
+  const monthExp=(data.expenses||[]).filter(e=>e.date.startsWith(thisMonth)).reduce((s,e)=>s+e.amount,0);
+  const surplus=data.income-monthExp;
+  let score=50;
+  if(data.income>0){const sr=surplus/data.income;if(sr>=.3)score=90;else if(sr>=.2)score=78;else if(sr>=.1)score=65;else if(sr>=0)score=50;else score=30;}
+  const advices=[];
+  if(inc>0){
+    if(surplus<0)advices.push({tag:'warn',tl:lang==='en'?'Warning':'تحذير',ti:lang==='en'?'You are overspending':'أنت تنفق أكثر من دخلك',tx:lang==='en'?'Cut wants first — dining out and subscriptions are the easiest to reduce.':'قلّل الرغبات أولاً — الأكل خارج والاشتراكات هي الأسهل في التقليص.'});
+    if(inc<5000)advices.push({tag:'save',tl:lang==='en'?'Savings':'ادخار',ti:lang==='en'?'Start a micro emergency fund':'ابدأ بصندوق طوارئ صغير',tx:lang==='en'?'Save EGP 200–300/month in a separate account. Small amounts build momentum.':'ادخر ٢٠٠–٣٠٠ جنيه شهرياً في حساب منفصل. المبالغ الصغيرة تبني الزخم.'});
+    else advices.push({tag:'save',tl:lang==='en'?'Savings':'ادخار',ti:lang==='en'?'Target a 3-6 month emergency fund':'استهدف صندوق طوارئ ٣–٦ أشهر',tx:lang==='en'?`Build ${fmtEGP(monthExp*4)} before investing aggressively.`:`ابن ${fmtEGP(monthExp*4)} قبل الاستثمار بقوة.`});
+    if(inc>=8000)advices.push({tag:'invest',tl:lang==='en'?'Invest':'استثمر',ti:lang==='en'?'Try bank certificates':'جرب شهادات البنوك',tx:lang==='en'?'Look for high-yield savings certificates at your local bank. Safe for beginners, minimum EGP 1,000.':'ابحث عن شهادات ادخار بعوائد مرتفعة في بنكك المحلي. آمنة للمبتدئين، الحد الأدنى ١٠٠٠ جنيه.'});
+    advices.push({tag:'spend',tl:lang==='en'?'Tip':'نصيحة',ti:lang==='en'?'Automate savings on payday':'أتمتة الادخار يوم الراتب',tx:lang==='en'?`Transfer ${fmtEGP(inc*sa)} to savings immediately on payday before spending anything.`:`حوّل ${fmtEGP(inc*sa)} للادخار فور استلام الراتب قبل أي إنفاق.`});
+  }
+  const tagCls={save:'tag-save',invest:'tag-invest',spend:'tag-spend',warn:'tag-warn'};
+  return(
+    <div style={{padding:'32px 24px',maxWidth:900,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+      <div className="fw-card mb-4">
+        <div className="fw-card-title">{t.incomeSetup}</div>
+        <div className="row g-3 align-items-end">
+          <div className="col-md-5">
+            <label className="fw-label">{t.netIncome}</label>
+            <div className="input-prefix"><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" placeholder="e.g. 15000" value={income} onChange={e=>setIncome(e.target.value)}/>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <button className="btn-fw" onClick={savePlan}>{savedBtn?<><i className="bi bi-check2"></i>{t.savedBtn}</>:<><i className="bi bi-floppy"></i>{t.savePlan}</>}</button>
+          </div>
+        </div>
+      </div>
+      {inc>0&&(<>
+        <div className="row g-3 mb-4">
+          {[{label:t.livingExp,val:fmtEGP(inc*sp),sub:Math.round(sp*100)+'%',cls:'c-accent3'},{label:t.monthlySav,val:fmtEGP(inc*sa),sub:Math.round(sa*100)+'%',cls:'c-success'},{label:t.investments,val:fmtEGP(inc*iv),sub:Math.round(iv*100)+'%',cls:'c-accent2'}].map((m,i)=>(
+            <div key={i} className="col-md-4"><div className="metric-card">
+              <div className="metric-label">{m.label}</div>
+              <div className={`metric-val ${m.cls}`}>{m.val}</div>
+              <div className="metric-sub">{m.sub} of income</div>
+            </div></div>
+          ))}
+        </div>
+        <div className="row g-3 mb-4">
+          <div className="col-md-5"><div className="fw-card">
+            <div className="fw-card-title">{t.healthScore}</div>
+            <div style={{display:'flex',alignItems:'center',gap:20}}>
+              <div style={{position:'relative',width:76,height:76,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <ProgressRing pct={score} size={76} stroke={5} score={score}/>
+                <div style={{position:'absolute',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+                  <span style={{fontFamily:'var(--ff-head)',fontSize:20,fontWeight:800,lineHeight:1,color:score>=70?'var(--success)':score>=50?'var(--accent)':'var(--danger)'}}>{score}</span>
+                  <span style={{fontSize:9,color:'var(--text3)'}}>/ 100</span>
+                </div>
+              </div>
+              <div>
+                <div style={{fontWeight:600,marginBottom:4}}>{score>=70?t.great:score>=50?t.room:t.needs}</div>
+                <div style={{fontSize:12,color:'var(--text2)'}}>{t.basedOn}</div>
+              </div>
+            </div>
+          </div></div>
+          <div className="col-md-7"><div className="fw-card">
+            <div className="fw-card-title">{t.budgetVsActual}</div>
+            {[{label:t.needsLabel,actual:monthExp,budget:inc*sp,color:'#50c8f0'},{label:t.savLabel,actual:Math.max(0,surplus),budget:inc*sa,color:'#50d090'}].map((b,i)=>(
+              <div key={i} style={{marginBottom:13}}>
+                <div style={{display:'flex',justifyContent:'space-between',marginBottom:5,fontSize:12}}>
+                  <span>{b.label}</span><span style={{color:'var(--text2)'}}>{fmtEGP(b.actual)} / {fmtEGP(b.budget)}</span>
+                </div>
+                <div className="prog-bar-bg"><div className="prog-bar-fill" style={{width:`${Math.min(100,(b.actual/b.budget)*100||0)}%`,background:b.actual>b.budget?'var(--danger)':b.color}}></div></div>
+              </div>
+            ))}
+          </div></div>
+        </div>
+        <div className="fw-card">
+          <div className="fw-card-title">{t.advice}</div>
+          <div className="row g-3">
+            {advices.map((a,i)=>(
+              <div key={i} className="col-md-6">
+                <div style={{background:'var(--bg3)',borderRadius:10,padding:'13px 15px',border:'1px solid var(--border)'}}>
+                  <span className={`tag ${tagCls[a.tag]}`} style={{marginBottom:7,display:'inline-block'}}>{a.tl}</span>
+                  <div style={{fontWeight:600,fontSize:14,marginBottom:4}}>{a.ti}</div>
+                  <div style={{fontSize:12,color:'var(--text2)',lineHeight:1.6}}>{a.tx}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </>)}
+    </div>
+  );
+}
+
+// ── GOALS ───────────────────────────────────────────
+function GoalsPage({data,setData,addToast,lang}){
+  const t=T[lang].goals;
+  const [name,setName]=useState('');
+  const [target,setTarget]=useState('');
+  const [savingsInput,setSavingsInput]=useState({});
+  function addGoal(){
+    if(!name||!target){addToast('⚠️','Missing fields','');return;}
+    const tgt=parseFloat(target);
+    if(isNaN(tgt)||tgt<=0)return;
+    const ng={id:Date.now(),name,target:tgt,saved:0,createdAt:new Date().toISOString()};
+    const nd={...data,goals:[...(data.goals||[]),ng]};
+    setData(nd);saveData(nd);setName('');setTarget('');
+    addToast('🎯',lang==='en'?'Goal added!':'تم إضافة الهدف!',name);
+  }
+  function addSavings(goalId){
+    const amt=parseFloat(savingsInput[goalId]||0);
+    if(!amt||amt<=0)return;
+    const goalItem=(data.goals||[]).find(g=>g.id===goalId);
+    const newSaved=goalItem?Math.min(goalItem.target,goalItem.saved+amt):0;
+    const nd={...data,goals:(data.goals||[]).map(g=>g.id===goalId?{...g,saved:newSaved}:g)};
+    setData(nd);saveData(nd);setSavingsInput(s=>({...s,[goalId]:''}));
+    if(goalItem&&newSaved>=goalItem.target){launchConfetti();addToast('🎉',lang==='en'?'Goal Reached! 🎉':'تحقق الهدف! 🎉',goalItem.name);}
+    else addToast('✅',lang==='en'?'Savings added!':'تم إضافة المدخرات!','');
+  }
+  const goals=data.goals||[];
+  const monthlySav=Math.max(0,(data.income||0)*.20);
+  return(
+    <div style={{padding:'32px 24px',maxWidth:860,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+      <div className="fw-card mb-4">
+        <div className="fw-card-title">{t.addGoal}</div>
+        <div className="row g-3 align-items-end">
+          <div className="col-md-5"><label className="fw-label">{t.goalName}</label>
+            <input className="fw-input" placeholder={lang==='en'?'e.g. Emergency fund':'مثال: صندوق طوارئ'} value={name} onChange={e=>setName(e.target.value)}/>
+          </div>
+          <div className="col-md-4"><label className="fw-label">{t.targetAmt}</label>
+            <div className="input-prefix"><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" placeholder="0" min="0" value={target} onChange={e=>setTarget(e.target.value)}/>
+            </div>
+          </div>
+          <div className="col-md-3"><button className="btn-fw" onClick={addGoal}><i className="bi bi-flag"></i>{t.addBtn}</button></div>
+        </div>
+      </div>
+      {!goals.length?(
+        <div className="empty-state">
+          <span className="es-icon">🎯</span>
+          <div className="es-title">{t.noGoals}</div>
+          <div className="es-sub">{t.noGoalsSub}</div>
+        </div>
+      ):goals.map(g=>{
+        const pct=g.target>0?(g.saved/g.target)*100:0;
+        const rem=g.target-g.saved;
+        const months=monthlySav>0?Math.ceil(rem/monthlySav):null;
+        const done=pct>=100;
+        return(
+          <div key={g.id} className="goal-card">
+            <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10}}>
+              <div>
+                <div style={{fontFamily:'var(--ff-head)',fontSize:16,fontWeight:700}}>{g.name}</div>
+                <div style={{fontSize:12,color:'var(--text2)',marginTop:2}}>{fmtEGP(g.saved)} / {fmtEGP(g.target)}</div>
+              </div>
+              <div style={{textAlign:'right',display:'flex',flexDirection:'column',alignItems:'flex-end',gap:4}}>
+                {done?<span className="tag tag-save">{t.reached}</span>:(months&&<div style={{fontSize:12,color:'var(--accent)',fontWeight:600}}>{months} {t.months}</div>)}
+                <button className="btn-danger" onClick={()=>{const nd={...data,goals:data.goals.filter(x=>x.id!==g.id)};setData(nd);saveData(nd);}}><i className="bi bi-trash"></i></button>
+              </div>
+            </div>
+            <div style={{marginBottom:10}}>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:'var(--text3)',marginBottom:4}}>
+                <span>{t.progress}</span><span>{Math.round(pct)}%</span>
+              </div>
+              <div className="prog-bar-bg"><div className="prog-bar-fill" style={{width:`${Math.min(100,pct)}%`,background:done?'var(--success)':'var(--accent)'}}></div></div>
+            </div>
+            {!done&&(<div style={{display:'flex',gap:8,alignItems:'center'}}>
+              <div className="input-prefix" style={{flex:1}}><span className="prefix-label">EGP</span>
+                <input className="fw-input" style={{padding:'8px 8px 8px 40px'}} type="number" placeholder="0" min="0"
+                  value={savingsInput[g.id]||''} onChange={e=>setSavingsInput(s=>({...s,[g.id]:e.target.value}))}/>
+              </div>
+              <button className="btn-sm" onClick={()=>addSavings(g.id)}><i className="bi bi-plus-circle"></i>{t.addSavings}</button>
+            </div>)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── CONVERTER (USD base rates table) ─────────────────
+function ConverterPage({data,setData,lang}){
+  const t=T[lang].converter;
+  const [amount,setAmount]=useState('100');
+  const [from,setFrom]=useState('USD');
+  const [to,setTo]=useState('EGP');
+  const [rates,setRates]=useState(null);// USD-based
+  const [loading,setLoading]=useState(false);
+  const [rateInfo,setRateInfo]=useState('');
+  const [error,setError]=useState('');
+
+  // Fetch rates — always fresh, cache max 1 hour
+  function fetchRates(force=false){
+    const now=Date.now();
+    const today=new Date().toISOString().slice(0,10);
+    const cacheAgeMs=now-(data.ratesCacheTimestamp||0);
+    const cacheOk=data.ratesCacheDate===today&&data.ratesCache&&cacheAgeMs<3600000;// 1 hour
+
+    if(!force&&cacheOk){
+      const egpBase=data.ratesCache;
+      if(egpBase&&egpBase.USD){
+        const usdBase={};
+        CURRENCIES.forEach(c=>{usdBase[c.code]=(egpBase[c.code]||1)/egpBase.USD;});
+        usdBase.USD=1;
+        const mins=Math.round(cacheAgeMs/60000);
+        setRates(usdBase);
+        setRateInfo(`${t.lastUpdate}: ${today} · ${mins}${lang==='en'?'m ago':'د مضت'}`);
+        return;
+      }
+    }
+
+    setLoading(true);setError('');
+    fetch('https://api.exchangerate-api.com/v4/latest/USD')
+      .then(r=>r.json())
+      .then(d=>{
+        const today2=new Date().toISOString().slice(0,10);
+        const r={USD:1};
+        CURRENCIES.forEach(c=>{if(d.rates[c.code])r[c.code]=d.rates[c.code];});
+        setRates(r);setLoading(false);
+        const timeStr=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+        setRateInfo(`${t.lastUpdate}: ${today2} ${timeStr}`);
+        const egpVal=d.rates['EGP']||53.8;
+        const egpBased={};
+        CURRENCIES.forEach(c=>{egpBased[c.code]=(d.rates[c.code]||1)/egpVal;});
+        egpBased.EGP=1;
+        const nd={...data,ratesCache:egpBased,ratesCacheDate:today2,ratesCacheTimestamp:Date.now()};
+        setData(nd);saveData(nd);
+      })
+      .catch(()=>{
+        setLoading(false);setError(t.rateError);
+        setRates(FALLBACK_RATES_USD);
+      });
+  }
+
+  useEffect(()=>{
+    fetchRates();
+    // Auto-refresh every hour while converter is open
+    const iv=setInterval(()=>fetchRates(true),3600000);
+    return()=>clearInterval(iv);
+  },[]);
+
+  const effectiveRates=rates||FALLBACK_RATES_USD;
+
+  function convert(amt,f,t2){
+    if(!effectiveRates[f]||!effectiveRates[t2])return 0;
+    const inUSD=f==='USD'?amt:amt/effectiveRates[f];
+    return t2==='USD'?inUSD:inUSD*effectiveRates[t2];
+  }
+  function swap(){const tmp=from;setFrom(to);setTo(tmp);}
+  const result=convert(parseFloat(amount)||0,from,to);
+  const fromCurr=CURRENCIES.find(c=>c.code===from);
+  const toCurr=CURRENCIES.find(c=>c.code===to);
+
+  return(
+    <div style={{padding:'32px 24px',maxWidth:680,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+      <div className="fw-card mb-4">
+        {loading&&<div style={{textAlign:'center',padding:'10px 0',color:'var(--text2)',fontSize:13,marginBottom:14}}><i className="bi bi-arrow-repeat" style={{marginRight:6,animation:'spin 1s linear infinite'}}></i>{t.fetchingRates}</div>}
+        {error&&<div style={{background:'rgba(240,80,80,.1)',border:'1px solid rgba(240,80,80,.3)',borderRadius:8,padding:'9px 13px',fontSize:12,color:'var(--danger)',marginBottom:14}}>{error}</div>}
+        <div className="row g-3 align-items-center">
+          <div className="col-md-5">
+            <label className="fw-label">{t.amount}</label>
+            <input className="fw-input" type="number" min="0" value={amount} onChange={e=>setAmount(e.target.value)} style={{fontSize:18,fontWeight:600}}/>
+          </div>
+          <div className="col-md-3">
+            <label className="fw-label">{t.from}</label>
+            <select className="fw-select" value={from} onChange={e=>setFrom(e.target.value)}>
+              {CURRENCIES.map(c=><option key={c.code} value={c.code}>{c.flag} {c.code}</option>)}
+            </select>
+          </div>
+          <div className="col-md-1" style={{display:'flex',alignItems:'flex-end',justifyContent:'center',paddingBottom:2}}>
+            <button className="swap-btn" onClick={swap}><i className="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div className="col-md-3">
+            <label className="fw-label">{t.to}</label>
+            <select className="fw-select" value={to} onChange={e=>setTo(e.target.value)}>
+              {CURRENCIES.map(c=><option key={c.code} value={c.code}>{c.flag} {c.code}</option>)}
+            </select>
+          </div>
+        </div>
+        <div style={{marginTop:22,textAlign:'center',padding:'20px',background:'var(--bg3)',borderRadius:12,border:'1px solid var(--border)'}}>
+          <div style={{fontSize:13,color:'var(--text2)',marginBottom:6}}>{fromCurr?.flag} {parseFloat(amount)||0} {lang==='en'?fromCurr?.name:fromCurr?.nameAr} =</div>
+          <div className="result-big">{toCurr?.flag} {result.toLocaleString('en',{maximumFractionDigits:2})} {to}</div>
+          <div style={{fontSize:11,color:'var(--text3)',marginTop:6}}>1 {from} = {convert(1,from,to).toLocaleString('en',{maximumFractionDigits:4})} {to}</div>
+        </div>
+        <div style={{marginTop:12,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+          {rateInfo&&<div className="rate-badge"><i className="bi bi-lightning-charge-fill"></i>{rateInfo}</div>}
+          <button
+            onClick={()=>fetchRates(true)}
+            disabled={loading}
+            style={{display:'inline-flex',alignItems:'center',gap:5,background:'none',border:'1px solid var(--border2)',borderRadius:8,padding:'4px 12px',color:'var(--text2)',cursor:loading?'not-allowed':'pointer',fontSize:12,fontWeight:500,transition:'all .2s',opacity:loading?.6:1}}
+            onMouseEnter={e=>{if(!loading){e.currentTarget.style.borderColor='var(--accent)';e.currentTarget.style.color='var(--accent)';}}}
+            onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border2)';e.currentTarget.style.color='var(--text2)';}}>
+            <i className={`bi bi-arrow-clockwise ${loading?'spin':''}`}></i>
+            {loading?(lang==='en'?'Updating...':'جاري التحديث...'):(lang==='en'?'Refresh rates':'تحديث الأسعار')}
+          </button>
+        </div>
+      </div>
+
+      {/* USD-BASE RATES TABLE */}
+      <div className="fw-card">
+        <div className="fw-card-title">{t.allRates}</div>
+        <table className="fw-table">
+          <thead><tr><th>{t.currency}</th><th style={{textAlign:'right'}}>{t.rate}</th></tr></thead>
+          <tbody>
+            {CURRENCIES.map(c=>(
+              <tr key={c.code}>
+                <td><span style={{display:'inline-flex',alignItems:'center',gap:10}}>
+                  <span style={{fontSize:20}}>{c.flag}</span>
+                  <span>{lang==='en'?c.name:c.nameAr} <span style={{color:'var(--text3)',fontSize:11}}>({c.code})</span></span>
+                </span></td>
+                <td style={{textAlign:'right',fontWeight:700,color:'var(--accent)',fontFamily:'var(--ff-head)',fontSize:15}}>
+                  {effectiveRates[c.code]?(c.code==='USD'?'1.0000':effectiveRates[c.code].toLocaleString('en',{maximumFractionDigits:4})):'-'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <style>{`@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}`}</style>
+    </div>
+  );
+}
+
+// ── RECURRING (with due dates + alerts) ──────────────
+function RecurringPage({data,setData,addToast,lang}){
+  const t=T[lang].recurring; const tCats=T[lang].cats;
+  const [name,setName]=useState('');
+  const [amount,setAmount]=useState('');
+  const [category,setCategory]=useState('bills');
+  const [dueDay,setDueDay]=useState('1');
+
+  function getDueStatus(day){
+    const today=new Date();
+    const thisDay=today.getDate();
+    const diff=day-thisDay;
+    if(diff===0)return{label:lang==='en'?'Due today!':'اليوم!',cls:'due-today'};
+    if(diff>0&&diff<=7)return{label:lang==='en'?`In ${diff} days`:`بعد ${diff} أيام`,cls:'due-soon'};
+    if(diff<0){const daysInMonth=new Date(today.getFullYear(),today.getMonth()+1,0).getDate();const remaining=(daysInMonth-thisDay)+day;if(remaining<=7)return{label:lang==='en'?`In ${remaining} days`:`بعد ${remaining} أيام`,cls:'due-soon'};}
+    return{label:lang==='en'?`Day ${day}`:`يوم ${day}`,cls:'due-ok'};
+  }
+
+  function addRecurring(){
+    if(!name||!amount){addToast('⚠️','Missing fields','');return;}
+    const amt=parseFloat(amount);
+    if(isNaN(amt)||amt<=0)return;
+    const dd=parseInt(dueDay)||1;
+    const nr={id:Date.now(),name,amount:amt,category,dueDay:dd};
+    const nd={...data,recurring:[...(data.recurring||[]),nr]};
+    setData(nd);saveData(nd);setName('');setAmount('');setDueDay('1');
+    addToast('🔄',lang==='en'?'Recurring added!':'تم الإضافة!',name);
+    // Auto-add this month
+    const today=new Date().toISOString().slice(0,10);
+    const thisMonth=getMonthKey(new Date());
+    const exists=(nd.expenses||[]).some(e=>e.recurringId===nr.id&&e.date.startsWith(thisMonth));
+    if(!exists){
+      const y=new Date().getFullYear(),m=new Date().getMonth();
+      const expDate=new Date(y,m,Math.min(dd,new Date(y,m+1,0).getDate())).toISOString().slice(0,10);
+      const ae={id:Date.now()+1,amount:amt,category,note:`${name} (${lang==='en'?'Auto':'تلقائي'})`,date:expDate,recurringId:nr.id};
+      const nd2={...nd,expenses:[ae,...(nd.expenses||[])]};
+      setData(nd2);saveData(nd2);
+    }
+  }
+
+  const recs=data.recurring||[];
+  const total=recs.reduce((s,r)=>s+r.amount,0);
+  const upcoming=recs.filter(r=>{
+    const s=getDueStatus(r.dueDay);
+    return s.cls==='due-today'||s.cls==='due-soon';
+  });
+
+  return(
+    <div style={{padding:'32px 24px',maxWidth:820,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+
+      {/* UPCOMING ALERTS */}
+      {upcoming.length>0&&(
+        <div style={{marginBottom:16}}>
+          <div style={{fontSize:12,fontWeight:600,textTransform:'uppercase',letterSpacing:1,color:'var(--warning)',marginBottom:8}}>⚠️ {t.upcoming}</div>
+          {upcoming.map(r=>{
+            const s=getDueStatus(r.dueDay);
+            const cat=EXPENSE_CATS.find(c=>c.id===r.category);
+            return(
+              <div key={r.id} className={`alert-banner ${s.cls==='due-today'?'danger':'warning'}`}>
+                <span style={{fontSize:18}}>{cat?.icon}</span>
+                <div>
+                  <div style={{fontWeight:600}}>{r.name}</div>
+                  <div style={{fontSize:12,opacity:.8}}>{fmtEGP(r.amount)} — {s.label}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {!upcoming.length&&recs.length>0&&(
+        <div className="alert-banner info" style={{marginBottom:16}}>
+          <i className="bi bi-check2-circle" style={{fontSize:18}}></i>
+          <span>{t.upcomingNone}</span>
+        </div>
+      )}
+
+      <div className="row g-3 mb-4">
+        <div className="col-md-6"><div className="metric-card">
+          <div className="metric-label">{t.totalMonthly}</div>
+          <div className="metric-val c-accent3">{fmtEGP(total)}</div>
+          <div className="metric-sub">{data.income>0?Math.round(total/data.income*100)+'% of income':''}</div>
+        </div></div>
+        <div className="col-md-6"><div className="metric-card">
+          <div className="metric-label">{lang==='en'?'Bills this week':'المستحقات هذا الأسبوع'}</div>
+          <div className={`metric-val ${upcoming.length>0?'c-warning':'c-success'}`}>{upcoming.length}</div>
+          <div className="metric-sub">{lang==='en'?'upcoming payments':'مدفوعات قادمة'}</div>
+        </div></div>
+      </div>
+
+      <div className="fw-card mb-4">
+        <div className="fw-card-title">{t.addNew}</div>
+        <div className="row g-3 align-items-end">
+          <div className="col-md-3">
+            <label className="fw-label">{t.name}</label>
+            <input className="fw-input" placeholder={lang==='en'?'e.g. Internet':'مثال: إنترنت'} value={name} onChange={e=>setName(e.target.value)}/>
+          </div>
+          <div className="col-md-2">
+            <label className="fw-label">{t.amount}</label>
+            <div className="input-prefix"><span className="prefix-label">EGP</span>
+              <input className="fw-input" type="number" placeholder="0" min="0" value={amount} onChange={e=>setAmount(e.target.value)}/>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <label className="fw-label">{t.category}</label>
+            <select className="fw-select" value={category} onChange={e=>setCategory(e.target.value)}>
+              {EXPENSE_CATS.map(c=><option key={c.id} value={c.id}>{c.icon} {tCats[c.id]}</option>)}
+            </select>
+          </div>
+          <div className="col-md-2">
+            <label className="fw-label">{t.dueDay}</label>
+            <input className="fw-input" type="number" min="1" max="31" placeholder="1" value={dueDay} onChange={e=>setDueDay(e.target.value)}/>
+          </div>
+          <div className="col-md-2">
+            <button className="btn-fw" onClick={addRecurring}><i className="bi bi-plus-circle"></i>{t.addBtn}</button>
+          </div>
+        </div>
+      </div>
+
+      {!recs.length?(
+        <div className="empty-state">
+          <span className="es-icon">📋</span>
+          <div className="es-title">{t.noRecurring}</div>
+          <div className="es-sub">{t.noRecurringSub}</div>
+        </div>
+      ):(
+        <div className="fw-card">
+          {recs.map(r=>{
+            const cat=EXPENSE_CATS.find(c=>c.id===r.category);
+            const status=getDueStatus(r.dueDay);
+            return(
+              <div key={r.id} className="rec-item">
+                <div style={{display:'flex',alignItems:'center',gap:12}}>
+                  <div style={{width:38,height:38,borderRadius:9,background:cat?.color+'22',display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,flexShrink:0}}>{cat?.icon}</div>
+                  <div>
+                    <div style={{fontWeight:600,fontSize:14}}>{r.name}</div>
+                    <div style={{fontSize:11,color:'var(--text2)'}}>{tCats[r.category]} · {lang==='en'?`Due day ${r.dueDay}`:`يوم ${r.dueDay}`}</div>
+                  </div>
+                </div>
+                <div style={{display:'flex',alignItems:'center',gap:10}}>
+                  <span className={`due-badge ${status.cls}`}>{status.label}</span>
+                  <span style={{fontFamily:'var(--ff-head)',fontSize:15,fontWeight:700,color:'var(--accent3)'}}>{fmtEGP(r.amount)}</span>
+                  <button className="btn-danger" onClick={()=>{const nd={...data,recurring:data.recurring.filter(x=>x.id!==r.id)};setData(nd);saveData(nd);}}><i className="bi bi-trash"></i></button>
+                </div>
+              </div>
+            );
+          })}
+          <div style={{paddingTop:12,display:'flex',justifyContent:'space-between',fontWeight:600,fontSize:14}}>
+            <span style={{color:'var(--text2)'}}>{lang==='en'?'Total':'الإجمالي'}</span>
+            <span style={{color:'var(--accent3)',fontFamily:'var(--ff-head)'}}>{fmtEGP(total)}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── LEARN ───────────────────────────────────────────
+function LearnPage({lang}){
+  const t=T[lang].learn;
+  const [openArticle,setOpenArticle]=useState(null);
+  const [search,setSearch]=useState('');
+  const filtered=ARTICLES.filter(a=>{
+    const title=lang==='en'?a.title:a.titleAr;
+    const cat=lang==='en'?a.category:a.categoryAr;
+    return title.toLowerCase().includes(search.toLowerCase())||cat.toLowerCase().includes(search.toLowerCase());
+  });
+  return(
+    <div style={{padding:'32px 24px',maxWidth:960,margin:'0 auto'}}>
+      <div style={{marginBottom:22}}>
+        <h2 style={{fontFamily:'var(--ff-head)',fontSize:24,fontWeight:800,letterSpacing:-1}}>{t.title}</h2>
+        <p style={{color:'var(--text2)',fontSize:13,marginTop:4}}>{t.sub}</p>
+      </div>
+      <div style={{position:'relative',marginBottom:22,maxWidth:380}}>
+        <i className="bi bi-search" style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'var(--text3)'}}></i>
+        <input className="fw-input" style={{paddingLeft:36}} placeholder={t.search} value={search} onChange={e=>setSearch(e.target.value)}/>
+      </div>
+      <div className="row g-3">
+        {filtered.map(a=>(
+          <div key={a.id} className="col-md-4" onClick={()=>setOpenArticle(a)}>
+            <div className="article-card">
+              <div className="article-thumb" style={{background:a.bg}}>{a.icon}</div>
+              <div className="article-body">
+                <div className="article-category" style={{color:a.catColor}}>{lang==='en'?a.category:a.categoryAr}</div>
+                <div className="article-title">{lang==='en'?a.title:a.titleAr}</div>
+                <div className="article-desc">{lang==='en'?a.desc:a.descAr}</div>
+                <div className="article-read-time"><i className="bi bi-clock" style={{marginRight:4}}></i>{lang==='en'?a.readTime:a.readTimeAr}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {openArticle&&(
+        <div className="modal-overlay" onClick={e=>{if(e.target===e.currentTarget)setOpenArticle(null);}}>
+          <div className="modal-box">
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
+              <span className="tag" style={{background:openArticle.catColor+'22',color:openArticle.catColor}}>{lang==='en'?openArticle.category:openArticle.categoryAr}</span>
+              <button onClick={()=>setOpenArticle(null)} style={{background:'none',border:'none',color:'var(--text2)',cursor:'pointer',fontSize:20}}><i className="bi bi-x-lg"></i></button>
+            </div>
+            <h2>{lang==='en'?openArticle.title:openArticle.titleAr}</h2>
+            <div style={{fontSize:11,color:'var(--text3)',marginBottom:16}}><i className="bi bi-clock" style={{marginRight:4}}></i>{lang==='en'?openArticle.readTime:openArticle.readTimeAr}</div>
+            {openArticle.content.map((c,i)=>c.type==='p'?<p key={i}>{lang==='en'?c.text:c.textAr}</p>:<h4 key={i}>{lang==='en'?c.text:c.textAr}</h4>)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+// ── ONBOARDING WIZARD ────────────────────────────────
+function OnboardingWizard({onDone, lang}){
+  const t = lang === 'en';
+  const [step, setStep] = useState(0);
+  const [name, setName] = useState('');
+  const [income, setIncome] = useState('');
+  const [job, setJob] = useState('');
+  const [living, setLiving] = useState('');
+  const [goals, setGoals] = useState([]);
+  const [currency] = useState('EGP');
+
+  const totalSteps = 5;
+  const pct = Math.round(((step) / totalSteps) * 100);
+
+  const jobOptions = t
+    ? [['employed','💼 Employed full-time'],['part','🧑‍💻 Part-time / Freelance'],['student','🎓 Student'],['unemployed','🔍 Looking for work']]
+    : [['employed','💼 موظف بدوام كامل'],['part','🧑‍💻 دوام جزئي / فريلانس'],['student','🎓 طالب'],['unemployed','🔍 أبحث عن عمل']];
+
+  const livingOptions = t
+    ? [['family','🏠 With family (no rent)'],['renting','🏢 Renting independently'],['shared','🤝 Shared apartment']]
+    : [['family','🏠 مع العائلة (بدون إيجار)'],['renting','🏢 مستأجر باستقلالية'],['shared','🤝 شقة مشتركة']];
+
+  const goalOptions = t
+    ? [['emergency','🚨 Emergency fund'],['invest','📈 Start investing'],['travel','✈️ Travel'],['gadget','💻 Buy a gadget'],['car','🚗 Car down payment'],['debt','💳 Pay off debt']]
+    : [['emergency','🚨 صندوق طوارئ'],['invest','📈 البدء بالاستثمار'],['travel','✈️ السفر'],['gadget','💻 شراء جهاز'],['car','🚗 دفعة أولى سيارة'],['debt','💳 سداد ديون']];
+
+  function toggleGoal(id){
+    setGoals(g => g.includes(id) ? g.filter(x=>x!==id) : [...g, id]);
+  }
+
+  function finish(){
+    const inc = parseFloat(income) || 0;
+    const newData = loadData();
+    newData.income = inc;
+    newData.onboardingDone = true;
+    newData.profile = { name, job, living, goals };
+    saveData(newData);
+    onDone(newData);
+  }
+
+  const steps = [
+    // Step 0: Welcome
+    <div key={0} style={{textAlign:'center', padding:'20px 0'}}>
+      <div style={{fontSize:56, marginBottom:20}}>👋</div>
+      <h2 style={{fontFamily:'var(--ff-head)', fontSize:28, fontWeight:800, letterSpacing:-1, marginBottom:14}}>
+        {t ? 'Welcome to FinWise!' : 'أهلاً بك في FinWise!'}
+      </h2>
+      <p style={{color:'var(--text2)', fontSize:15, lineHeight:1.8, maxWidth:400, margin:'0 auto 28px'}}>
+        {t
+          ? "Let's set up your personalized financial plan in under 2 minutes. We'll ask you a few quick questions to get started."
+          : 'سنعدّ خطتك المالية الشخصية في أقل من دقيقتين. سنسألك بعض الأسئلة السريعة للبدء.'}
+      </p>
+      <div style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap', marginBottom:32}}>
+        {[
+          {icon:'🔒', label: t?'Private':'خاص'},
+          {icon:'⚡', label: t?'2 minutes':'دقيقتان'},
+          {icon:'🆓', label: t?'100% Free':'مجاني كلياً'},
+        ].map((b,i)=>(
+          <div key={i} style={{background:'var(--bg3)', border:'1px solid var(--border)', borderRadius:10, padding:'10px 18px', textAlign:'center'}}>
+            <div style={{fontSize:20}}>{b.icon}</div>
+            <div style={{fontSize:12, color:'var(--text2)', marginTop:4}}>{b.label}</div>
+          </div>
+        ))}
+      </div>
+      <button className="btn-fw" style={{fontSize:16, padding:'14px 36px'}} onClick={()=>setStep(1)}>
+        {t ? "Let's go →" : 'هيا نبدأ ←'}
+      </button>
+    </div>,
+
+    // Step 1: Name
+    <div key={1}>
+      <div style={{textAlign:'center', marginBottom:28}}>
+        <div style={{fontSize:40, marginBottom:12}}>🙋</div>
+        <h3 style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:700, marginBottom:8}}>
+          {t ? "What's your name?" : 'ما اسمك؟'}
+        </h3>
+        <p style={{color:'var(--text2)', fontSize:14}}>{t ? 'So we can personalize your experience.' : 'حتى نخصص تجربتك.'}</p>
+      </div>
+      <input className="fw-input" style={{fontSize:18, textAlign:'center', marginBottom:24}}
+        placeholder={t ? 'Your name...' : 'اسمك...'}
+        value={name} onChange={e=>setName(e.target.value)}
+        autoFocus/>
+      <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+        <button className="btn-fw-outline" onClick={()=>setStep(0)}>{t?'← Back':'→ رجوع'}</button>
+        <button className="btn-fw" onClick={()=>setStep(2)}>
+          {name.trim() ? (t?'Next →':'التالي ←') : (t?'Skip →':'تخطي ←')}
+        </button>
+      </div>
+    </div>,
+
+    // Step 2: Income
+    <div key={2}>
+      <div style={{textAlign:'center', marginBottom:24}}>
+        <div style={{fontSize:40, marginBottom:12}}>💰</div>
+        <h3 style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:700, marginBottom:8}}>
+          {t ? "What's your monthly income?" : 'ما دخلك الشهري؟'}
+        </h3>
+        <p style={{color:'var(--text2)', fontSize:14}}>
+          {t ? 'Enter your net income after any deductions.' : 'أدخل دخلك الصافي بعد الخصومات.'}
+        </p>
+      </div>
+      <div style={{maxWidth:300, margin:'0 auto 12px'}}>
+        <div className="input-prefix">
+          <span className="prefix-label">EGP</span>
+          <input className="fw-input" type="number" min="0"
+            style={{fontSize:22, fontWeight:700, textAlign:'center', paddingLeft:50}}
+            placeholder="0" value={income} onChange={e=>setIncome(e.target.value)} autoFocus/>
+        </div>
+      </div>
+      {income && parseFloat(income) > 0 && (
+        <div style={{textAlign:'center', marginBottom:20}}>
+          {[
+            {label: t?'Suggested spending':'مصاريف مقترحة', val: parseFloat(income)*0.60, color:'var(--accent3)'},
+            {label: t?'Savings':'ادخار', val: parseFloat(income)*0.20, color:'var(--success)'},
+            {label: t?'Investment':'استثمار', val: parseFloat(income)*0.20, color:'var(--accent2)'},
+          ].map((r,i)=>(
+            <div key={i} style={{display:'inline-block', margin:'4px 6px', background:'var(--bg3)', border:'1px solid var(--border)', borderRadius:8, padding:'6px 14px'}}>
+              <div style={{fontSize:11, color:'var(--text3)'}}>{r.label}</div>
+              <div style={{fontFamily:'var(--ff-head)', fontSize:14, color:r.color, fontWeight:700}}>EGP {Math.round(r.val).toLocaleString()}</div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+        <button className="btn-fw-outline" onClick={()=>setStep(1)}>{t?'← Back':'→ رجوع'}</button>
+        <button className="btn-fw" onClick={()=>setStep(3)}>{t?'Next →':'التالي ←'}</button>
+      </div>
+    </div>,
+
+    // Step 3: Job + Living
+    <div key={3}>
+      <div style={{textAlign:'center', marginBottom:20}}>
+        <div style={{fontSize:40, marginBottom:12}}>🏡</div>
+        <h3 style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:700, marginBottom:6}}>
+          {t ? 'Tell us about your situation' : 'أخبرنا عن وضعك'}
+        </h3>
+        <p style={{color:'var(--text2)', fontSize:13}}>{t?'Helps us give better advice.':'يساعدنا على تقديم نصائح أفضل.'}</p>
+      </div>
+      <div style={{marginBottom:16}}>
+        <label className="fw-label">{t?'Employment status':'الوضع الوظيفي'}</label>
+        <div style={{display:'flex', flexWrap:'wrap', gap:8, marginTop:6}}>
+          {jobOptions.map(([val, label])=>(
+            <button key={val} className={`cat-chip ${job===val?'selected':''}`}
+              style={job===val?{borderColor:'var(--accent)', color:'var(--accent)', background:'var(--accent-dim)'}:{}}
+              onClick={()=>setJob(val)}>{label}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{marginBottom:20}}>
+        <label className="fw-label">{t?'Living situation':'وضع السكن'}</label>
+        <div style={{display:'flex', flexWrap:'wrap', gap:8, marginTop:6}}>
+          {livingOptions.map(([val, label])=>(
+            <button key={val} className={`cat-chip ${living===val?'selected':''}`}
+              style={living===val?{borderColor:'var(--accent)', color:'var(--accent)', background:'var(--accent-dim)'}:{}}
+              onClick={()=>setLiving(val)}>{label}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+        <button className="btn-fw-outline" onClick={()=>setStep(2)}>{t?'← Back':'→ رجوع'}</button>
+        <button className="btn-fw" onClick={()=>setStep(4)}>{t?'Next →':'التالي ←'}</button>
+      </div>
+    </div>,
+
+    // Step 4: Goals
+    <div key={4}>
+      <div style={{textAlign:'center', marginBottom:20}}>
+        <div style={{fontSize:40, marginBottom:12}}>🎯</div>
+        <h3 style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:700, marginBottom:6}}>
+          {t ? "What are your financial goals?" : 'ما أهدافك المالية؟'}
+        </h3>
+        <p style={{color:'var(--text2)', fontSize:13}}>{t?'Pick all that apply.':'اختر كل ما ينطبق عليك.'}</p>
+      </div>
+      <div style={{display:'flex', flexWrap:'wrap', gap:10, marginBottom:24, justifyContent:'center'}}>
+        {goalOptions.map(([id, label])=>(
+          <button key={id}
+            className={`cat-chip ${goals.includes(id)?'selected':''}`}
+            style={goals.includes(id)?{borderColor:'var(--accent)', color:'var(--accent)', background:'var(--accent-dim)', fontSize:14, padding:'10px 16px'}:{fontSize:14, padding:'10px 16px'}}
+            onClick={()=>toggleGoal(id)}>{label}</button>
+        ))}
+      </div>
+      <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+        <button className="btn-fw-outline" onClick={()=>setStep(3)}>{t?'← Back':'→ رجوع'}</button>
+        <button className="btn-fw" onClick={()=>setStep(5)}>{t?'Next →':'التالي ←'}</button>
+      </div>
+    </div>,
+
+    // Step 5: Done
+    <div key={5} style={{textAlign:'center', padding:'10px 0'}}>
+      <div style={{fontSize:60, marginBottom:16}}>🎉</div>
+      <h2 style={{fontFamily:'var(--ff-head)', fontSize:26, fontWeight:800, letterSpacing:-1, marginBottom:10}}>
+        {name ? (t ? `You're all set, ${name}!` : `كل شيء جاهز، ${name}!`) : (t ? "You're all set!" : 'كل شيء جاهز!')}
+      </h2>
+      <p style={{color:'var(--text2)', fontSize:14, lineHeight:1.8, maxWidth:380, margin:'0 auto 24px'}}>
+        {t
+          ? "Your personalized financial plan is ready. Start by adding your first expense or exploring your dashboard."
+          : 'خطتك المالية الشخصية جاهزة. ابدأ بإضافة أول مصروف أو استكشاف لوحة التحكم.'}
+      </p>
+      {goals.length > 0 && (
+        <div style={{background:'var(--bg3)', border:'1px solid var(--border)', borderRadius:12, padding:'14px 20px', marginBottom:24, display:'inline-block', textAlign:'left'}}>
+          <div style={{fontSize:12, color:'var(--text3)', marginBottom:8, textTransform:'uppercase', letterSpacing:1}}>{t?'Your goals':'أهدافك'}</div>
+          {goals.map(g=>{
+            const opt = goalOptions.find(([id])=>id===g);
+            return opt ? <div key={g} style={{fontSize:13, marginBottom:4}}>{opt[1]}</div> : null;
+          })}
+        </div>
+      )}
+      {income && parseFloat(income) > 0 && (
+        <div style={{marginBottom:24}}>
+          <div style={{background:'var(--accent-dim)', border:'1px solid rgba(184,240,80,.3)', borderRadius:12, padding:'12px 20px', display:'inline-block'}}>
+            <div style={{fontSize:12, color:'var(--text3)', marginBottom:4}}>{t?'Your monthly income':'دخلك الشهري'}</div>
+            <div style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:800, color:'var(--accent)'}}>EGP {Math.round(parseFloat(income)).toLocaleString()}</div>
+          </div>
+        </div>
+      )}
+      <div style={{display:'flex', gap:10, justifyContent:'center'}}>
+        <button className="btn-fw-outline" onClick={()=>setStep(4)}>{t?'← Back':'→ رجوع'}</button>
+        <button className="btn-fw" style={{fontSize:16, padding:'13px 32px'}} onClick={finish}>
+          {t ? '🚀 Go to Dashboard' : '🚀 انطلق للوحة التحكم'}
+        </button>
+      </div>
+    </div>,
+  ];
+
+  return(
+    <div style={{position:'fixed', inset:0, background:'var(--bg)', zIndex:4000, display:'flex', alignItems:'center', justifyContent:'center', padding:20, overflowY:'auto'}}>
+      <div style={{width:'100%', maxWidth:520}}>
+        {/* Header */}
+        <div style={{textAlign:'center', marginBottom:28}}>
+          <div style={{fontFamily:'var(--ff-head)', fontSize:22, fontWeight:800, color:'var(--accent)', marginBottom:16}}>Fin<span style={{color:'var(--text)'}}>Wise</span></div>
+          {step > 0 && step < totalSteps && (
+            <>
+              <div style={{display:'flex', justifyContent:'space-between', fontSize:11, color:'var(--text3)', marginBottom:6}}>
+                <span>{t?`Step ${step} of ${totalSteps-1}`:`الخطوة ${step} من ${totalSteps-1}`}</span>
+                <span>{pct}%</span>
+              </div>
+              <div className="prog-bar-bg">
+                <div className="prog-bar-fill" style={{width:pct+'%', background:'var(--accent)'}}></div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Card */}
+        <div style={{background:'var(--card-bg)', border:'1px solid var(--border2)', borderRadius:20, padding:'32px 28px', boxShadow:'0 24px 60px rgba(0,0,0,.3)'}}>
+          {steps[step]}
+        </div>
+
+        {/* Skip all */}
+        {step > 0 && step < totalSteps && (
+          <div style={{textAlign:'center', marginTop:16}}>
+            <button onClick={finish} style={{background:'none', border:'none', color:'var(--text3)', cursor:'pointer', fontSize:13, textDecoration:'underline'}}>
+              {t ? 'Skip setup and go to dashboard' : 'تخطي الإعداد والذهاب للوحة التحكم'}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+// ── SCROLL TO TOP ──────────────────────────────────────
+function ScrollTopBtn(){
+  const [show,setShow]=useState(false);
+  useEffect(()=>{
+    const h=()=>setShow(window.scrollY>300);
+    window.addEventListener('scroll',h);
+    return()=>window.removeEventListener('scroll',h);
+  },[]);
+  return(
+    <button className={`scroll-top ${show?'show':''}`}
+      onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>
+      <i className="bi bi-chevron-up"></i>
+    </button>
+  );
+}
+
+// ── CONFETTI ───────────────────────────────────────────
+function launchConfetti(){
+  const colors=['#b8f050','#50c8f0','#f09050','#f05080','#c050f0','#50d090'];
+  for(let i=0;i<70;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    const size=Math.random()*10+5;
+    el.style.cssText=`left:${Math.random()*100}vw;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>.5?'50%':'3px'};animation-duration:${Math.random()*2+1.5}s;animation-delay:${Math.random()*.6}s;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(Math.random()*2+1.5)*1000+600);
+  }
+}
+
+// ── PROGRESS RING ──────────────────────────────────────
+function ProgressRing({pct,size=76,stroke=5,score}){
+  const r=(size-stroke*2)/2;
+  const circ=2*Math.PI*r;
+  const offset=circ-(Math.min(100,pct)/100)*circ;
+  const cls=score>=70?'score-ring-good':score>=50?'score-ring-ok':'score-ring-bad';
+  return(
+    <svg width={size} height={size} className="progress-ring">
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="var(--bg4)" strokeWidth={stroke}/>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" strokeWidth={stroke}
+        strokeDasharray={circ} strokeDashoffset={offset}
+        className={`progress-ring-circle ${cls}`}/>
+    </svg>
+  );
+}
+
+// ── SMART INSIGHTS ─────────────────────────────────────
+function SmartInsights({data,lang}){
+  const tl=lang==='en';
+  const expenses=data.expenses||[];
+  const income=data.income||0;
+  const thisMonth=new Date().toISOString().slice(0,7);
+  const lastMonth=new Date(new Date().getFullYear(),new Date().getMonth()-1,1).toISOString().slice(0,7);
+  const thisExp=expenses.filter(e=>e.date.startsWith(thisMonth));
+  const lastExp=expenses.filter(e=>e.date.startsWith(lastMonth));
+  const thisTotal=thisExp.reduce((s,e)=>s+e.amount,0);
+  const lastTotal=lastExp.reduce((s,e)=>s+e.amount,0);
+  const insights=[];
+
+  const catTotals={};
+  thisExp.forEach(e=>{catTotals[e.category]=(catTotals[e.category]||0)+e.amount;});
+  const topCat=Object.entries(catTotals).sort((a,b)=>b[1]-a[1])[0];
+
+  if(lastTotal>0&&thisTotal>0){
+    const diff=Math.round((thisTotal-lastTotal)/lastTotal*100);
+    if(diff>15) insights.push({icon:'📈',color:'#f05050',title:tl?`Spending up ${diff}% vs last month`:`الإنفاق ارتفع ${diff}٪ عن الشهر الماضي`,desc:tl?`EGP ${Math.round(thisTotal-lastTotal).toLocaleString()} more than last month.`:`${Math.round(thisTotal-lastTotal).toLocaleString()} جنيه أكثر من الشهر الماضي.`});
+    else if(diff<-10) insights.push({icon:'📉',color:'#50d090',title:tl?`Spending down ${Math.abs(diff)}% — great!`:`الإنفاق انخفض ${Math.abs(diff)}٪ — رائع!`,desc:tl?`Saved EGP ${Math.round(lastTotal-thisTotal).toLocaleString()} vs last month.`:`وفّرت ${Math.round(lastTotal-thisTotal).toLocaleString()} جنيه مقارنة بالشهر الماضي.`});
+  }
+
+  if(topCat&&income>0&&topCat[1]>income*.15){
+    const cat=EXPENSE_CATS.find(c=>c.id===topCat[0]);
+    insights.push({icon:cat?.icon||'💸',color:'#f09050',title:tl?`${cat?.id} is your biggest spend`:`${T[lang].cats[topCat[0]]||topCat[0]} أكبر مصاريفك`,desc:tl?`EGP ${Math.round(topCat[1]).toLocaleString()} — ${Math.round(topCat[1]/income*100)}% of income.`:`${Math.round(topCat[1]).toLocaleString()} جنيه — ${Math.round(topCat[1]/income*100)}٪ من دخلك.`});
+  }
+
+  if(income>0&&thisTotal>0){
+    const surplus=income-thisTotal;
+    const rate=Math.round(surplus/income*100);
+    if(surplus>0) insights.push({icon:'🏦',color:'#50d090',title:tl?`Saving ${rate}% this month`:`تدخر ${rate}٪ هذا الشهر`,desc:tl?`EGP ${Math.round(surplus).toLocaleString()} available for savings.`:`${Math.round(surplus).toLocaleString()} جنيه متاح للادخار.`});
+    const dayOfMonth=new Date().getDate();
+    const projected=Math.round(thisTotal/dayOfMonth*new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate());
+    if(projected>income*.9) insights.push({icon:'⚡',color:'#f0c050',title:tl?'Projected to overspend this month':'متوقع تجاوز الميزانية هذا الشهر',desc:tl?`Projected end-of-month: EGP ${projected.toLocaleString()}.`:`المتوقع نهاية الشهر: ${projected.toLocaleString()} جنيه.`});
+  }
+
+  if(!insights.length&&thisExp.length>0) insights.push({icon:'✨',color:'#b8f050',title:tl?'Everything looks great!':'كل شيء يبدو رائعاً!',desc:tl?'Keep up the excellent financial habits.':'استمر في عاداتك المالية الممتازة.'});
+
+  if(!insights.length) return null;
+  return(
+    <div className="fw-card" style={{marginTop:16}}>
+      <div className="fw-card-title">💡 {tl?'Smart Insights':'رؤى ذكية'}</div>
+      {insights.map((ins,i)=>(
+        <div key={i} className="insight-card" style={{background:ins.color+'12',borderColor:ins.color+'33'}}>
+          <div className="insight-icon" style={{background:ins.color+'22',color:ins.color}}>{ins.icon}</div>
+          <div>
+            <div style={{fontWeight:600,fontSize:13,marginBottom:3,color:'var(--text)'}}>{ins.title}</div>
+            <div style={{fontSize:12,color:'var(--text2)'}}>{ins.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── APP ─────────────────────────────────────────────
+
+// ── RESET BUTTON ───────────────────────────────────────
+function ResetButton({lang, onReset}){
+  const [open, setOpen] = useState(false);
+  const [wiping, setWiping] = useState(false);
+  const tl = lang === 'en';
+
+  function doReset(){
+    setWiping(true);
+    setTimeout(()=>{
+      localStorage.removeItem('finwise_v4');
+      onReset();
+      setOpen(false);
+      setWiping(false);
+    }, 500);
+  }
+
+  return(
+    <>
+      <div className="reset-btn-wrap">
+        <button
+          className="reset-btn fw-tooltip"
+          data-tip={tl ? 'Reset all data' : 'مسح جميع البيانات'}
+          onClick={()=>setOpen(true)}
+          title={tl ? 'Reset all data' : 'مسح جميع البيانات'}>
+          <i className="bi bi-arrow-counterclockwise"></i>
+        </button>
+      </div>
+
+      {open && (
+        <div className="reset-modal-overlay" onClick={e=>{if(e.target===e.currentTarget)setOpen(false);}}>
+          <div className={`reset-modal ${wiping?'wiping':''}`}>
+            <span className="reset-modal-icon">🗑️</span>
+            <h3>{tl ? 'Reset All Data?' : 'مسح جميع البيانات؟'}</h3>
+            <p>{tl
+              ? 'This will permanently delete everything you have entered in FinWise. This action cannot be undone.'
+              : 'سيتم حذف كل ما أدخلته في FinWise بشكل نهائي. لا يمكن التراجع عن هذا الإجراء.'}</p>
+            <ul className="reset-warning-list">
+              {[
+                tl?'All expenses & transactions':'جميع المصاريف والمعاملات',
+                tl?'Budget plan & income':'خطة الميزانية والدخل',
+                tl?'Financial goals':'الأهداف المالية',
+                tl?'Recurring bills':'الفواتير الثابتة',
+                tl?'Onboarding profile':'بيانات الإعداد الأولي',
+              ].map((item,i)=>(
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+            <button className="btn-reset-confirm" onClick={doReset}>
+              <i className="bi bi-trash3-fill"></i>
+              {tl ? 'Yes, delete everything' : 'نعم، احذف كل شيء'}
+            </button>
+            <button className="btn-reset-cancel" onClick={()=>setOpen(false)}>
+              {tl ? 'Cancel, keep my data' : 'إلغاء، احتفظ ببياناتي'}
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function App(){
+  const [theme,setTheme]=useState('dark');
+  const [lang,setLang]=useState('en');
+  const [page,setPage]=useState('home');
+  const [data,setData]=useState(loadData);
+  const [toasts,setToasts]=useState([]);
+  const [showQuickAdd,setShowQuickAdd]=useState(false);
+  const [showOnboarding,setShowOnboarding]=useState(!loadData().onboardingDone);
+
+  function handleOnboardingDone(newData){
+    setData(newData);
+    setShowOnboarding(false);
+    if(newData.income>0) setPage('home');
+  }
+
+  function handleReset(){
+    const fresh={income:0,expenses:[],goals:[],recurring:[],ratesCache:null,ratesCacheDate:null,onboardingDone:false};
+    setData(fresh);
+    setShowOnboarding(true);
+    setPage('home');
+    addToast('✅',lang==='en'?'Data cleared!':'تم مسح البيانات!',lang==='en'?'Starting fresh...':'بداية جديدة...');
+  }
+
+  useEffect(()=>{document.body.setAttribute('data-theme',theme);},[theme]);
+  useEffect(()=>{document.documentElement.setAttribute('dir',lang==='ar'?'rtl':'ltr');},[lang]);
+
+  function addToast(icon,title,msg){
+    const id=Date.now();
+    setToasts(t=>[...t,{id,icon,title,msg}]);
+    setTimeout(()=>setToasts(t=>t.filter(x=>x.id!==id)),3500);
+  }
+
+  // Recurring due alerts on load
+  // Global Escape closes any open popup
+  useEffect(()=>{
+    const h=e=>{
+      if(e.key==='Escape'){
+        if(showQuickAdd)setShowQuickAdd(false);
+      }
+    };
+    window.addEventListener('keydown',h);
+    return()=>window.removeEventListener('keydown',h);
+  },[showQuickAdd]);
+
+  useEffect(()=>{
+    const recs=data.recurring||[];
+    const today=new Date().getDate();
+    recs.forEach(r=>{
+      const diff=r.dueDay-today;
+      if(diff===0)addToast('🔔',lang==='en'?`${r.name} is due today!`:`${r.name} مستحق اليوم!`,fmtEGP(r.amount));
+      else if(diff===1)addToast('⚠️',lang==='en'?`${r.name} due tomorrow`:`${r.name} مستحق غداً`,fmtEGP(r.amount));
+    });
+    if(data.onboardingDone&&data.profile?.name){
+      const h=new Date().getHours();
+      const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+      setTimeout(()=>addToast('👋',`${g}, ${data.profile.name}!`,lang==='en'?'Welcome back to FinWise':'مرحباً بعودتك إلى FinWise'),900);
+    }
+  },[]);
+
+  const thisMonth=getMonthKey(new Date());
+  const monthExp=(data.expenses||[]).filter(e=>e.date.startsWith(thisMonth)).reduce((s,e)=>s+e.amount,0);
+  const hasAlert=data.income>0&&monthExp>data.income*.8;
+  const today=new Date().getDate();
+  const hasRecurringAlert=(data.recurring||[]).some(r=>{const d=r.dueDay-today;return d>=0&&d<=3;});
+  const alerts={tracker:hasAlert,recurring:hasRecurringAlert};
+
+  const props={data,setData,addToast,lang};
+  const pages={
+    home:<HomePage setPage={setPage} onQuickAdd={()=>setShowQuickAdd(true)} {...props}/>,
+    tracker:<TrackerPage {...props}/>,
+    history:<HistoryPage {...props}/>,
+    plan:<PlanPage {...props}/>,
+    goals:<GoalsPage {...props}/>,
+    converter:<ConverterPage {...props}/>,
+    recurring:<RecurringPage {...props}/>,
+    learn:<LearnPage lang={lang}/>,
+  };
+
+  return(
+    <>
+      {showOnboarding && <OnboardingWizard onDone={handleOnboardingDone} lang={lang}/>}
+      {!showOnboarding && <>
+        <Navbar page={page} setPage={setPage} theme={theme} toggleTheme={()=>setTheme(t=>t==='dark'?'light':'dark')}
+          lang={lang} toggleLang={()=>setLang(l=>l==='en'?'ar':'en')} alerts={alerts} onQuickAdd={()=>setShowQuickAdd(true)}/>
+        {pages[page]||pages['home']}
+        {showQuickAdd&&<QuickAddPopup onClose={()=>setShowQuickAdd(false)} {...props}/>}
+        <ExpandingNav page={page} setPage={setPage} lang={lang} theme={theme}
+          toggleTheme={()=>setTheme(t=>t==='dark'?'light':'dark')}
+          toggleLang={()=>setLang(l=>l==='en'?'ar':'en')}
+          alerts={alerts} onQuickAdd={()=>setShowQuickAdd(true)}/>
+      </>}
+      <ToastContainer toasts={toasts}/>
+      {!showOnboarding&&<ResetButton lang={lang} onReset={handleReset}/>}
+      <ScrollTopBtn/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+</script>
+</body>
+</html>
